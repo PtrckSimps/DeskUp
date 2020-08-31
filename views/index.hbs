@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <title>DeskUp - It's Worth it</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script> 
   </head>
   <body>
     <nav>
@@ -27,8 +29,34 @@
         </form>
     </nav>
 
-    <div class="content">
-      <header>homepage</header>
+    <div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+      <div class="gallery-cell">
+        <div class="slider">
+          <img class="sliderimg" src="images/desk1.webp">
+          <div class="info">
+            <p id="sliderCategory">GUIDE</p>
+            <a id="sliderArticleTitle">9 Minimalist Desk Setups for Your Workspace</a>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-cell">
+        <div class="slider">
+          <img class="sliderimg" src="images/lgUW.png">
+          <div class="info">
+            <p id="sliderCategory">REVIEW</p>
+            <a id="sliderArticleTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor Review</a>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-cell">
+        <div class="slider">
+          <img class="sliderimg" src="images/wfm2.jpg">
+          <div class="info">
+            <p id="sliderCategory">GUIDE</p>
+            <a id="sliderArticleTitle">Work From Home Essentials</a>
+          </div>
+        </div>
+      </div>
     </div>
     
     <script>
@@ -37,6 +65,7 @@
     const cancelBtn = document.querySelector(".cancel-icon");
     const items = document.querySelector(".nav-items");
     const form = document.querySelector("form");
+    const carp = document.querySelector(".owl-carousel");
 
     menuBtn.onclick = ()=>{
         items.classList.add("active");

@@ -17,6 +17,7 @@ nav{
   justify-content: space-between;
   height: 70px;
   padding: 0 100px;
+  margin-bottom: 50px;
 }
 nav .logo{
   color: #fff;
@@ -40,7 +41,7 @@ nav .nav-items li a{
   text-decoration: none;
 }
 nav .nav-items li a:hover{
-  color: #9b9b9b;c;
+  color: #9b9b9b;
 }
 nav form{
   display: flex;
@@ -71,7 +72,7 @@ nav form button{
   cursor: pointer;
 }
 nav form button:hover{
-  background: #5a5a5a;;
+  background: #5a5a5a;
 }
 nav .menu-icon,
 nav .cancel-icon,
@@ -209,3 +210,64 @@ nav .logo.space{
   font-weight: 700;
 }
 
+.gallery-cell {
+  width: 980px;
+  height: 470px;
+  margin-right: 10px;
+  background: lightgray;
+  counter-increment: gallery-cell;
+}
+
+.slider{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.sliderimg{
+  max-width: 100%;
+  height: auto;
+}
+
+.info{
+  position: absolute;
+  bottom: 50px;
+  height: 86px;   
+  width: 80%;
+  background-color: rgba(65,65,65,0.90);
+  padding: 15px 20px;
+}
+
+#sliderCategory{
+  color: #48B8AC;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+#sliderArticleTitle{
+  color: #FFF;
+  font-weight: 500;
+  font-size: 160%;
+}
+
+/* @media (max-width: 910px){
+  #sliderCategory{
+    color: #48B8AC;
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+  #sliderArticleTitle{
+    color: #FFF;
+    font-weight: 500;
+    font-size: 0.9em;
+  }
+} */
+/* cell number */
+/* .gallery-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+} */
