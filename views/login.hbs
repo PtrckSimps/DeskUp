@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <style>
+            div.error{
+                background-color: #ffdbdb;
+                color: darkred;
+                border-left: 4px solid darkred;
+                padding: 10px;
+                width: 280px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h3>REGISTER</h3>
+        {{#if error}}
+            <div class="error">{{error}} </div> <br>
+        {{/if}}
+        
+        <form method="post" action="register">
+            Username <input type="text" name="un"> <br>
+            Password <input type="password" name="pw"> <br>
+            <input type="submit" value="Register">
+        </form>
+
+        Login
+        <form method="post" action="login">
+            Username <input type="text" name="un"> <br>
+            Password <input type="password" name="pw"> <br>
+            <input type="submit" value="Login">
+        </form>
+    </body>
+</html>
