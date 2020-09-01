@@ -5,59 +5,133 @@
     <title>DeskUp - It's Worth it</title>
     <link rel="stylesheet" href="index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
   <body>
-    <nav>
-        <div class="menu-icon"><span class="fas fa-bars"></span></div>
-        <div class="logo">DeskUp</div>
-        <div class="nav-items">
-            <li><a href="/">Home</a></li>
-            <li><a href="/reviews">Reviews</a></li>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/brands">Brands</a></li>
-            <li><a href="/login">Login</a></li>
-            <li></li>
-        </div>
-        <div class="search-icon"><span class="fas fa-search"></span></div>
-        <div class="cancel-icon"><span class="fas fa-times"></span></div>
-        <form action="#">
-            <input type="search" class="search-data" placeholder="Search" required>
-            <button type="submit" class="fas fa-search"></button>
-        </form>
-    </nav>
+       <nav class="navbar navbar-expand-md fixed-top animated ">
+            <a class="navbar-brand" href="#">
+                <span>DeskUp</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reviews">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/featured">Featured</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/brands">Brands</a>
+                    </li>
+                </ul>
+                
+                <form action="#">
+                    <input type="search" class="search-data" placeholder="Search" required>
+                    <button type="submit" class="fas fa-search"></button>
+                </form>
+
+                <a role="button" href="/logreg" class="btn btn-secondary" id="loginButton"> 
+                  <i class="fas fa-user"></i> Login
+                </a>
+            </div>
+        </nav>
 
     <div class="content">
-      <header>reviews</header>
+      
+      <div class="container featuredCont">
+        <div class="row headerRowFeatured">
+          <div class="col-md-5">
+            <h1 class="featuredText">Reviews</h1>
+          </div>
+
+          <div class="col-md-7">
+
+            <span class="featuredAbout">If you're looking for product reviews for you next upgrade, 
+              we got you covered. View the product reviews our very own contributors
+              have in store for you. 
+            </span>
+          </div>
+        </div>
+        
+        <div class="row contentRowReviews">
+          <div class="col-md-6 col-md-6-Padding">
+            <img src="images/lgUW.png" class="img-responsive featuredIMG">
+          </div>
+
+          <div class="col-md-6 col-md-6-Padding">
+
+            <div class="row">
+                <div class="col">
+                    <span id="articleScore">DeskUP SCORE</span>
+                </div>
+                <div class="col">
+                    <div class="progress" id="score" style="height: 20px;">
+                        <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="25" aria-valuemin="50" aria-valuemax="100" id="scoreValue">8.8</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="articleTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
+            <p class="articleDetails">by Patrick Lawrence. August 31, 2020</p>
+            <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
+              Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors... <span id="readmore">Read more</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="row contentRowReviews">
+          <div class="col-md-6 col-md-6-Padding">
+            <img src="images/wfm2.jpg" class="img-responsive featuredIMG">
+          </div>
+
+          <div class="col-md-6 col-md-6-Padding">
+            <div class="row">
+                <div class="col">
+                    <span id="articleScore">DeskUP SCORE</span>
+                </div>
+                <div class="col">
+                    <div class="progress" id="score" style="height: 20px;">
+                        <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="25" aria-valuemin="50" aria-valuemax="100" id="scoreValue">8.8</div>
+                    </div>
+                </div>
+            </div>
+            <p class="articleTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
+            <p class="articleDetails">by Patrick Lawrence. August 31, 2020</p>
+            <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
+              Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors... <span id="readmore">Read more</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>
-    const menuBtn = document.querySelector(".menu-icon span");
-    const searchBtn = document.querySelector(".search-icon");
-    const cancelBtn = document.querySelector(".cancel-icon");
-    const items = document.querySelector(".nav-items");
-    const form = document.querySelector("form");
-
-    menuBtn.onclick = ()=>{
-        items.classList.add("active");
-        menuBtn.classList.add("hide");
-        searchBtn.classList.add("hide");
-        cancelBtn.classList.add("show");
-    }
-    cancelBtn.onclick = ()=>{
-        items.classList.remove("active");
-        menuBtn.classList.remove("hide");
-        searchBtn.classList.remove("hide");
-        cancelBtn.classList.remove("show");
-        form.classList.remove("active");
-        cancelBtn.style.color = "#48b8ac";
-    }
-    searchBtn.onclick = ()=>{
-        form.classList.add("active");
-        searchBtn.classList.add("hide");
-        cancelBtn.classList.add("show");
-    }
-  </script>
-
+        <div class="footer">
+            <div class="container-fluid footerCont">
+                <div class="container">
+                <div class="row justify-content-md-center">
+                    <h4>About Us</h4>
+                </div>
+                <div class="row justify-content-md-center">
+                    <h5>Community</h5>
+                </div>
+                <div class="row justify-content-md-center">
+                    <h5>Contributors</h5>
+                </div>
+                <div class="row justify-content-md-center">
+                    <h5>Developers</h5>
+                </div>
+                </div>
+            </div>
+        </div>
   </body>
+
 </html>
