@@ -31,6 +31,10 @@ app.get("/reviews", function(req, res){
     res.render('reviews.hbs')
 })
 
+app.get("/RevArticle", function(req, res){
+    res.render('RevArticle.hbs')
+})
+
 app.get('/featured', (req,res) =>{
     res.render('featured.hbs')
 })
