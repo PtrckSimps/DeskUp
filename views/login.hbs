@@ -16,13 +16,13 @@
 
             
             {{!-- <div class="center"> --}}
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand logo" href="/">
                 <span>DeskUp</span>
             </a>
             {{!-- </div> --}}
         </nav>
 
-        <div class="row">
+        <div class="row" id="marginclass">
             <div class="col-md-4 m-auto">
                 <a class ="btn-link" href="/" id="backbutton">< Back</a>
             </div>
@@ -30,8 +30,8 @@
         <div class="row pt-5 ">
              <div class="col-md-4 m-auto">
                 <div class="card card-body" id="shadow">
-                {{!-- <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login to DeskUp</h1> --}}
-                <h1 class="text-center mb-3"> Login to DeskUp</h1>
+                <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login to DeskUp</h1>
+
                 {{!-- include error messages herem --}}
                 <form action="/" method="POST">
                     <div class="form-group">
@@ -42,10 +42,10 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"/>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" id="regButton">Login</button>
+                    <button type="submit" class="btn btn-primary btn-block" id="logregButton">Login</button>
                 </form>
                 <p class="lead mt-3">
-                    Don't have an account yet?  <a href="/register">Register</a>
+                    Don't have an account yet?  <a href="/register" >Register</a>
                 </p>
                 </div>
             </div>
