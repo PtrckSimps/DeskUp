@@ -622,3 +622,33 @@ section.main-highlight, .carousel-item{
   position:200px 30px;
 }
 
+/* LOGIN REGISTER */
+
+div.error{
+  background-color: #ffdbdb;
+  color: darkred;
+  border-left: 4px solid darkred;
+  padding: 10px;
+  width: 280px;
+}
+
+/* Manage Post */
+
+#addButton{
+  background-color: #48b8ac;
+  border-color:#48b8ac;
+}
+
+.postTitle{
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.postPreview{
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.mng-post-row:hover{
+  background-color: rgba(173, 173, 173, 0.11);
+}

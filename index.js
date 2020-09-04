@@ -4,8 +4,9 @@ const bodyparser = require("body-parser")
 const session = require("express-session")
 const path = require("path")
 
-
+let users =  []
 const app = express()
+
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(express.static(path.join(__dirname, 'static')));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
@@ -34,14 +35,74 @@ app.get('/', (req,res) =>{
     
     //logged in visitor
     //res.render('home.hbs')
-})
 
-app.post("/login", urlencoder, function(req, res){
-    res.render('home.hbs')
+    // if(req.session.username){
+    //     res.render("home.hbs",{
+    //         username: req.session.username
+    //     })
+    // }else{
+    //     res.render("index.hbs") 
+    // }
 })
 
 app.post("/register", urlencoder, function(req, res){
+    // let username = req.body.un
+    // let password = req.body.pw
+
+    // if(username.trim() == "" || password.trim() == ""){
+    //     res.render("register.hbs", {
+    //         error: "Enter a username and password"
+    //     })
+    // }else if(!isAvailable(username)){
+    //     res.render("register.hbs", {
+    //         error: "username is already taken"
+    //     })
+    // }else{
+    //     req.session.username = req.body.un
+    //     users.push({
+    //         username: username,
+    //         password: password
+    //     })
+
+    //     res.redirect("/")
+    // }
     res.render('home.hbs')
+})
+
+function isAvailable(username){
+    for(let i =0; i < users.length; i++ ){
+        if(users[i].username == username){
+            return false
+        }
+    }
+    return true
+}
+
+app.post("/login", urlencoder, function(req, res){
+    // if(!matches(req.body.un, req.body.pw)){
+    //     res.render("login.hbs", {
+    //         error: "not match"
+    //     })
+    // }else{
+    //     res.render("home.hbs",{
+    //         username: req.body.un
+    //     })
+    // }
+    res.render('home.hbs')
+})
+
+function matches(username, password){
+    for(let i =0; i < users.length; i++ ){
+        if(users[i].username == username && users[i].password == password){
+            return true
+        }
+    }
+    return false
+}
+
+app.get("/signout", urlencoder, (req, res) =>{
+    // req.session.destroy()
+    res.redirect("/")
 })
 
 app.get("/reviews", function(req, res){
@@ -82,6 +143,11 @@ app.get("/ReviewPost", urlencoder, function(req, res){
 
     //else
     // res.render('reviewPostUser.hbs')
+})
+
+app.get("/manage-post", function(req, res){
+    //Going to register page
+    res.render('managepost.hbs')
 })
 
 
