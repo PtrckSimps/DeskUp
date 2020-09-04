@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>DeskUp - It's Worth it</title>
-    <link rel="stylesheet" href="index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  </head>
-  <body>
-       <nav class="navbar navbar-expand-md fixed-top animated ">
+    <head>
+        <meta charset="utf-8">
+        <title>DeskUp - It's Worth it</title>
+        <link rel="stylesheet" href="index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md fixed-top animated ">
             <a class="navbar-brand logo" href="#">
                 <span>DeskUp</span>
             </a>
@@ -30,7 +30,7 @@
                         <a class="nav-link" href="/featured">Featured</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/brands">Brands</a>
+                        <a class="nav-link" href="/categories">Categories</a>
                     </li>
                 </ul>
                 
@@ -39,96 +39,136 @@
                     <button type="submit" class="fas fa-search"></button>
                 </form>
 
-                <a role="button" href="/logreg" class="btn btn-secondary" id="loginButton"> 
-                  <i class="fas fa-user"></i> Login
-                </a>
+                <div class="btn-group">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
+                        <i class="fas fa-user"></i>Account
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
+                        <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                    </div>
+                </div>
             </div>
         </nav>
 
     <div class="content" id="marginclass">
-      <div class="container featuredCont">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb" id="breadcrumbBG">
-            <li class="breadcrumb-item"><a href="/" id="breadcrumbItemColor">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Featured</li>
-          </ol>
-        </nav>
-        <div class="row headerRowFeatured">
-          <div class="col-md-5" id="col-md-Feartured">
-            <h1 class="featuredText">Featured</h1>
-          </div>
+        <div class="container featuredCont">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" id="breadcrumbBG">
+                    <li class="breadcrumb-item"><a href="/" id="breadcrumbItemColor">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Featured</li>
+                </ol>
+            </nav>
+            <div class="row headerRowFeatured">
+                <div class="col-md-5" id="col-md-Feartured">
+                    <h1 class="featuredText">Featured</h1>
+                </div>
 
-          <div class="col-md-7" id="col-md-Feartured">
+                <div class="col-md-7" id="col-md-Feartured">
 
-            <span class="featuredAbout">If you're looking for product reviews for you next upgrade, 
-              we got you covered. View the product reviews our very own contributors
-              have in store for you. 
-            </span>
-          </div>
+                    <span class="featuredAbout">If you're looking for product reviews for you next upgrade, 
+                    we got you covered. View the product reviews our very own contributors
+                    have in store for you. 
+                    </span>
+                </div>
+            </div>
+            
+            <div class="row contentRowFeatured">
+                <div class="col-md-6 featuredColmd6">
+                    <img src="images/lgUW.png" class="img-responsive featuredIMG">
+                    <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
+                    <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
+                    <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
+                    Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
+                    </p>
+                </div>
+
+                <div class="col-md-6 featuredColmd6">
+                    <img src="images/lgUW.png" class="img-responsive featuredIMG">
+                    <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
+                    <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
+                    <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
+                    Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row contentRowFeatured">
+                <div class="col-md-6 featuredColmd6">
+                    <img src="images/lgUW.png" class="img-responsive featuredIMG">
+                    <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
+                    <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
+                    <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
+                    Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
+                    </p>
+                </div>
+
+                <div class="col-md-6 featuredColmd6">
+                    <img src="images/lgUW.png" class="img-responsive featuredIMG">
+                    <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
+                    <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
+                    <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
+                    Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
+                    </p>
+                </div>
+            </div>
+
         </div>
         
-        <div class="row contentRowFeatured">
-          <div class="col-md-6 featuredColmd6">
-            <img src="images/lgUW.png" class="img-responsive featuredIMG">
-            <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
-            <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
-            <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
-              Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
-            </p>
-          </div>
-
-          <div class="col-md-6 featuredColmd6">
-            <img src="images/lgUW.png" class="img-responsive featuredIMG">
-            <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
-            <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
-            <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
-              Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
-            </p>
-          </div>
-        </div>
-
-        <div class="row contentRowFeatured">
-          <div class="col-md-6 featuredColmd6">
-            <img src="images/lgUW.png" class="img-responsive featuredIMG">
-            <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
-            <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
-            <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
-              Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
-            </p>
-          </div>
-
-          <div class="col-md-6 featuredColmd6">
-            <img src="images/lgUW.png" class="img-responsive featuredIMG">
-            <p class="articleTitle">The 10 Best 144hz Monitor for your Gaming Needs</p>
-            <p class="articleDetails">by Jeric Barraza. August 31, 2020</p>
-            <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
-              Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.
-            </p>
-          </div>
-        </div>
-
-      </div>
     </div>
 
-    <div class="footer">
-      <div class="container-fluid footerCont">
-        <div class="container">
-          <div class="row justify-content-md-center">
-            <h4>About Us</h4>
-          </div>
-          <div class="row justify-content-md-center">
-            <h5>Community</h5>
-          </div>
-          <div class="row justify-content-md-center">
-            <h5>Contributors</h5>
-          </div>
-          <div class="row justify-content-md-center">
-            <h5>Developers</h5>
-          </div>
+        {{!-- <div class="footer">
+        <div class="container-fluid footerCont">
+            <div class="container">
+            <div class="row justify-content-md-center">
+                <h4>About Us</h4>
+            </div>
+            <div class="row justify-content-md-center">
+                <h5>Community</h5>
+            </div>
+            <div class="row justify-content-md-center">
+                <h5>Contributors</h5>
+            </div>
+            <div class="row justify-content-md-center">
+                <h5>Developers</h5>
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
+        </div> --}}
+        <div class="mt-5 pt-4 pb-3 footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-xs-12 about-company">
+                        <h2>About Us</h2>
+                        <p class="pr-5 text-white-50">DeskUp is a product review website. It shares insight, inspiration and ideas about desk setups. 
+                        Contains detailed guides and reviews of different products found on a desk setup</p>
+                        <p>NPM Packages: Express, HBS, Express-Session, Body-parser, Mongoose, Bootsrap</p>
+                    </div>
+                    <div class="col-lg-2 col-xs-12 links">
+                        {{!-- <h4 class="mt-lg-0 mt-sm-3">More</h4>
+                        <ul class="m-0 p-0">
+                            <li>- <a href="#">Community</a></li>
+                            <li>- <a href="#">Contributors</a></li>
+                            <li>- <a href="#">Developers</a></li>
+                        </ul> --}}
+                    </div>
+                    <div class="col-lg-4 col-xs-12 location">
+                        <h4 class="mt-lg-0 mt-sm-4">Contact Us</h4>
+                        <p>22, Lorem ipsum dolor, consectetur adipiscing</p>
+                        <p class="mb-0"><i class="fa fa-phone mr-3"></i>(541) 754-3010</p>
+                        <p><i class="fa fa-envelope mr-3"></i>DeskUp@dkup.com</p>
+                    </div>
+                </div>
+                <div class="row mt-2 border-top">
+                    <div class="col copyright">
+                    <p class=""><small class="text-white-50">© 2020. All Rights Reserved.</small></p>
+                    </div>
+                </div>
+            </div>
+    </div>    
 
   </body>
-
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

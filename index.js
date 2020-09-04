@@ -24,32 +24,59 @@ app.use(session({
 }))
 
 app.get('/', (req,res) =>{
+    //access the homepage
+
+    // not logged in visitor
     res.render('index.hbs')
+    
+    //logged in visitor
+    //res.render('home.hbs')
+})
+
+app.post("/login", urlencoder, function(req, res){
+    res.render('home.hbs')
+})
+
+app.post("/register", urlencoder, function(req, res){
+    res.render('home.hbs')
 })
 
 app.get("/reviews", function(req, res){
+    //User goes to Categories page
     res.render('reviews.hbs')
 })
 
-app.get("/RevArticle", function(req, res){
-    res.render('RevArticle.hbs')
-})
-
 app.get('/featured', (req,res) =>{
+    //User goes to Featured page
     res.render('featured.hbs')
 })
 
-app.get("/logreg", function(req, res){
-    res.render('logreg.hbs')
+app.get('/categories', (req,res) =>{
+    //User goes to Categories page
+    res.render('categories.hbs')
 })
 
+// app.get("/logreg", function(req, res){
+//     res.render('logreg.hbs')
+// })
+
 app.get("/register", function(req, res){
+    //Going to register page
     res.render('register.hbs')
 })
 
 app.get("/login", function(req, res){
+    //Going to register page
     res.render('login.hbs')
 })
+
+app.get("/ReviewPost", urlencoder, function(req, res){
+    //user want to view review post
+    //get post id
+    
+    res.render('reviewPost.hbs')
+})
+
 
 app.listen(3000, ()=> { 
     console.log("Server ready")
