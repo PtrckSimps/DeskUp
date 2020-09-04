@@ -6,10 +6,18 @@
         <link rel="stylesheet" href="index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <script language="JavaScript" type="text/javascript" src="/js/jquery.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    </head>
     
+        <script language="JavaScript" type="text/javascript">
+                $(document).ready(function(){
+                    $('.carousel').carousel({
+                    interval: 3000
+                    })
+                });    
+        </script> 
+    </head>
     <body>
         <nav class="navbar navbar-expand-md fixed-top animated">
             <a class="navbar-brand logo" href="#">
@@ -53,35 +61,145 @@
                 </div>
         </nav>
 
-        <div class="content testing">
-            <h1>Homepage</h1>
-        </div>
+        <main class = "main-container">
+            <section class="main-highlight">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                             <img class="d-block w-100" src="images/maxresdefault.jpg" alt="First slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                     <h5>The Wider, The Better!</h5>
+                                    <h6>by Marco Pangilinan</h6>
+                                    <p>Smaller screens makes it harder for some people to work, check out some of our top picks for ultra 
+                                        wide monitors.
+                                    </p>
+                                </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/coolsetup.jpg" alt="Second slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Accessory Makes Everything Better!</h5>
+                                    <h6>by Patrick Simpao</h6>
+                                    <p>Pimp up your setup with some of RGB light strips and computer accessories from our verified list.
+                                    </p>
+                                </div>
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="images/lgUW.png" alt="Third slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>The 10 Best 144hz Monitor for your Gaming Needs</h5>
+                                    <h6>by Jeric Barraza</h6>
+                                    <p>As technology becomes more and more advanced, there's a lot of options for 
+                                         Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.</p>
+                                </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    </div>
+            </section>
+            <section class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <span class="title">Latest Posts</span>
+                            <div class="line"></div>
+                            <div class="row">
+                                <div class="col-md-4 first" style="background-image: url(images/lgUW.png); background-size:cover;">
+                              
+                                </div>
+                                <div class="col-md-8 first">
+                                    <h3>The 10 Best 144hz Monitor for your Gaming Needs</h3>
+                                    <span>by Jeric Barraza</span>
+                                    <p>As technology becomes more and more advanced, there's a lot of options for 
+                                         Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.</p>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-4 second" style="background-image: url(images/wfm2.jpg); background-size: cover;">
 
-        {{!-- <div class="footer">
-            <div class="container-fluid footerCont">
-                <div class="container">
-                <div class="row justify-content-md-center">
-                    <h4>About Us</h4>
+                                </div>
+                                <div class="col-md-8 second">
+                                    <h3>LG's stunning 38-inch UltraWide Monitor</h3> 
+                                    <span>by Patrick Simpao</span>
+                                    <p>As technology becomes more and more advanced, there's a lot of options for 
+                                          Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.</p>
+                                </div>
+                            </div>
+
+                              <div class="row">
+                                <div class="col-md-4 second" style="background-image: url(images/keyboardHome.webp); background-size: cover;">
+
+                                </div>
+                                <div class="col-md-8 second">
+                                    <h3>RED5 Nova Gaming Keyboard: Is it worth it?</h3>
+                                    <p>The new gaming keyboard by RED5 just came out today. With its Cherry MX Red switches and
+                                        RGB backlighting, is it worth it?
+                                    </p>
+                                </div>
+                            </div>
+                            
+                          
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-4">
+                            <span class="title">Featured Posts</span>
+                              <div class="line"></div>
+                            <div class="row">
+                              <a class="col-md-12 first" style="background-image: url(images/wfh.jpg);background-size: cover;">
+                                  
+                                    <div class="text">
+                                        <span class="title">Work From Home SetUps</span><br>
+                                    <span>Learn the best work from home setups...</span>
+                                    </div>
+                                    
+                                </a>
+                            </div>
+                             <div class="row">
+                                <a class="col-md-12 second" style="background-image: url(images/bglogreg.jpg);background-size: cover;">
+                                     <div class="text">
+                                        <span class="title">Affordable Monitors You'll Need</span><br>
+                                    <span>Choose among a list of affordable monitors...</span>
+                                    </div>
+                                    
+                                </a>
+                            </div>
+                            <div class="row">
+                                <a class="col-md-12 third" style="background-image: url(images/lgmonitor.jpg);background-position:0 160px;background-size: cover;">
+                                     <div class="text">
+                                        <span class="title">Applications for Productivity</span><br>
+                                    <span>Applications to boost your productivity...</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row justify-content-md-center">
-                    <h5>Community</h5>
-                </div>
-                <div class="row justify-content-md-center">
-                    <h5>Contributors</h5>
-                </div>
-                <div class="row justify-content-md-center">
-                    <h5>Developers</h5>
-                </div>
-                </div>
-            </div>
-        </div> --}}
+
+            </section>
+
+        </main>
+
+        
         <div class="mt-5 pt-4 pb-3 footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-xs-12 about-company">
                         <h2>About Us</h2>
                         <p class="pr-5 text-white-50">DeskUp is a product review website. It shares insight, inspiration and ideas about desk setups. 
-                          Contains detailed guides and reviews of different products found on a desk setupLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis </p>
+                          Contains detailed guides and reviews of different products found on a desk setup</p>
                         <p>NPM Packages: Express, HBS, Express-Session, Body-parser, Mongoose, Bootsrap</p>
                       </div>
                     <div class="col-lg-2 col-xs-12 links">

@@ -8,6 +8,9 @@ const path = require("path")
 const app = express()
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(express.static(path.join(__dirname, 'static')));
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/bootjs', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+
 app.set("view engine", "hbs") 
 
 const urlencoder = bodyparser.urlencoded({
