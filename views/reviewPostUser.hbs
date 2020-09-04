@@ -144,19 +144,24 @@
                 </div>
                 <div class="container mb-5">
                     <p class="comments">Comments</p>
-                    <div class="d-flex flex-row comment-row m-t-0 mb-5">
-                        <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div>
-                        <div class="comment-text w-100">
-                            <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>            
-                        </div>
-
+                    <div class="d-flex flex-row">
+                        {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
+                        <input class="commentNow" placeholder="Write a comment..."></input>
                     </div> 
+                    <div class="row d-flex justify-content-end">
+                        <div class="commentLoginbutton"><a href="/login" style="color: white; text-decoration: none">Comment</a></div>
+                    </div>
                 
                     <div class="d-flex flex-row comment-row m-t-0">
                         <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
-                            <div class="comment-footer"> <span class="text-muted float-right">August 14, 2020</span> <button type="button" class="btn btn-info btn-sm">Edit</button> <button type="button" class="btn btn-success btn-sm">Publish</button> <button type="button" class="btn btn-danger btn-sm">Delete</button> </div>            
+                            <div class="comment-footer"> 
+                                <span class="text-muted float-right">August 14, 2020</span> 
+                                {{!-- <button type="button" class="btn btn-info btn-sm">Edit</button> 
+                                <button type="button" class="btn btn-success btn-sm">Publish</button> 
+                                <button type="button" class="btn btn-danger btn-sm">Delete</button> --}}
+                            </div>            
                         </div>
 
                     </div> 
@@ -165,7 +170,12 @@
                         <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg" alt="user" width="50" class="rounded-circle"></div>
                         <div class="comment-text active w-100">
                             <h6 class="font-medium">Michael Hussey</h6> <span class="m-b-15 d-block">I have the same product and its great!. </span>
-                            <div class="comment-footer"> <span class="text-muted float-right">August31, 2020</span> <button type="button" class="btn btn-info btn-sm">Edit</button> <button type="button" class="btn btn-success btn-sm">Publish</button> <button type="button" class="btn btn-danger btn-sm">Delete</button> </div>
+                            <div class="comment-footer"> 
+                                <span class="text-muted float-right">August31, 2020</span> 
+                                {{!-- <button type="button" class="btn btn-info btn-sm">Edit</button> 
+                                <button type="button" class="btn btn-success btn-sm">Publish</button>
+                                <button type="button" class="btn btn-danger btn-sm">Delete</button>  --}}
+                            </div>
                         </div>
                     </div>
     
@@ -173,7 +183,12 @@
                         <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="user" width="50" class="rounded-circle"></div>
                             <div class="comment-text w-100">
                             <h6 class="font-medium">Johnathan Doeting</h6> <span class="m-b-15 d-block">Thanks for the wonderful review. </span>
-                            <div class="comment-footer"> <span class="text-muted float-right">September 3, 2020</span> <button type="button" class="btn btn-info btn-sm">Edit</button> <button type="button" class="btn btn-success btn-sm">Publish</button> <button type="button" class="btn btn-danger btn-sm">Delete</button> </div>
+                            <div class="comment-footer"> 
+                                <span class="text-muted float-right">September 3, 2020</span> 
+                                {{!-- <button type="button" class="btn btn-info btn-sm">Edit</button> 
+                                <button type="button" class="btn btn-success btn-sm">Publish</button> 
+                                <button type="button" class="btn btn-danger btn-sm">Delete</button>  --}}
+                            </div>
                         </div>
                     </div>
                 </div>

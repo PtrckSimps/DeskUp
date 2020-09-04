@@ -77,7 +77,11 @@ app.get("/ReviewPost", urlencoder, function(req, res){
     //user want to view review post
     //get post id
     
+    //if not logged
     res.render('reviewPost.hbs')
+
+    //else
+    // res.render('reviewPostUser.hbs')
 })
 
 
