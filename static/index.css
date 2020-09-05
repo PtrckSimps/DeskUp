@@ -229,9 +229,9 @@ color: #afb2b7;
 }
 
 .prosList{
- margin-left: 15px;
- font-size: 1.1rem;
- font-family: 'Roboto', sans-serif;
+  margin-left: 15px;
+  font-size: 1.1rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* FOOOTER */
@@ -566,6 +566,7 @@ section.main-highlight, .carousel-item{
 .main-content>.container-fluid>.row>.col-md-4>.title{
   font-weight: 700;
   font-size: 2rem;
+
 }
 
 .main-content>.container-fluid>.row>.col-md-7>.row>.col-md-4{
@@ -609,16 +610,15 @@ section.main-highlight, .carousel-item{
 
 .main-content>.container-fluid>.row>.col-md-4 .col-md-12{
   height: 100px;
-  /* width:1000px; */
   background-color: grey;
-  /* border:1px solid black; */
   color:white;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .main-content>.container-fluid>.row>.col-md-4 .row{
-opacity:0.9;
-box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px;
+  opacity:0.9;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px;
   transition: all .3s ease-in-out;
   
 }
