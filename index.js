@@ -150,6 +150,11 @@ app.get("/manage-post", function(req, res){
     res.render('managepost.hbs')
 })
 
+app.get("/monitorCategory" , function(req, res) {
+    res.render('monitorCategory.hbs')
+})
+
+
 
 app.listen(3000, ()=> { 
     console.log("Server ready")
