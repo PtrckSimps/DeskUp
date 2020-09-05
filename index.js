@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/bootjs', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
-app.set("view engine", "hbs") 
+app.set("view engine", hbs) 
 
 const urlencoder = bodyparser.urlencoded({
     extended: false
@@ -29,18 +29,13 @@ app.use(session({
 
 app.get('/', (req,res) =>{
     //access the homepage
-
-    // not logged in visitor
-    // res.render('index.hbs')
-    
-    //logged in visitor
-    //res.render('home.hbs')
-
+    //logged in
     if(req.session.username){
         res.render("index.hbs",{
             username: req.session.username
         })
-    }else{
+    }//not logged in
+    else{
         res.render("index.hbs", {
             username: ""
         }) 
@@ -65,10 +60,8 @@ app.post("/register", urlencoder, function(req, res){
             username: username,
             password: password
         })
-
         res.redirect("/")
     }
-    // res.render('home.hbs')
 })
 
 function isAvailable(username){
@@ -81,18 +74,17 @@ function isAvailable(username){
 }
 
 app.post("/login", urlencoder, function(req, res){
+    // not registered or wrong inputs
     if(!matches(req.body.un, req.body.pw)){
         res.render("login.hbs", {
             error: "not match"
         })
-    }else{
-        // res.render("index.hbs",{
-        //     username: req.body.un
-        // })
+    }
+    // credentials match
+    else{
         req.session.username = req.body.un
         res.redirect("/")
     }
-    // res.render('home.hbs')
 })
 
 function matches(username, password){
@@ -109,9 +101,27 @@ app.get("/signout", urlencoder, (req, res) =>{
     res.redirect("/")
 })
 
+app.get("/register", function(req, res){
+    //Going to register page
+    res.render('register.hbs')
+})
+
+app.get("/login", function(req, res){
+    //Going to register page
+    res.render('login.hbs')
+})
+
+
 app.get("/reviews", function(req, res){
     //User goes to Categories page
     res.render('reviews.hbs', {
+        username: req.session.username
+    })
+})
+
+app.get("/ReviewPost", urlencoder, function(req, res){
+    //user want to view review post
+    res.render('reviewPost.hbs', {
         username: req.session.username
     })
 })
@@ -123,43 +133,16 @@ app.get('/featured', (req,res) =>{
     })
 })
 
+app.get('/featuredPost', urlencoder, (req,res) =>{
+    //User goes to Featured Specific page
+    res.render('featuredPost.hbs', {
+        username: req.session.username
+    })
+})
+
 app.get('/categories', (req,res) =>{
     //User goes to Categories page
     res.render('categories.hbs', {
-        username: req.session.username
-    })
-})
-
-// app.get("/logreg", function(req, res){
-//     res.render('logreg.hbs')
-// })
-
-app.get("/register", function(req, res){
-    //Going to register page
-    res.render('register.hbs')
-})
-
-app.get("/login", function(req, res){
-    //Going to register page
-    res.render('login.hbs')
-})
-
-app.get("/ReviewPost", urlencoder, function(req, res){
-    //user want to view review post
-    //get post id
-    
-    //if not logged
-    res.render('reviewPost.hbs', {
-        username: req.session.username
-    })
-
-    //else
-    // res.render('reviewPostUser.hbs')
-})
-
-app.get("/manage-post", function(req, res){
-    //Going to register page
-    res.render('managepost.hbs', {
         username: req.session.username
     })
 })
@@ -170,7 +153,40 @@ app.get("/monitorCategory" , function(req, res) {
     })
 })
 
+app.get("/manage-post", function(req, res){
+    //Going to register page
+    res.render('managepost.hbs', {
+        username: req.session.username
+    })
+})
 
+app.post("/comment", urlencoder, function(req, res){
+    var comment = req.body.comment
+
+    //to implement - adding to 
+    
+    res.render('reviewPost.hbs', {
+        username: req.session.username
+    })
+})
+
+app.post("/add", urlencoder, function(req, res){
+
+    //to implement - adding to db
+    
+})
+
+app.patch("/edit", urlencoder, function(req, res){
+    //edit post content
+    //to implement - edit content  db
+    
+})
+
+app.delete("/delete", urlencoder, function(req, res){
+    //delete a post
+    //to implement - delete content  db
+    
+})
 
 app.listen(3000, ()=> { 
     console.log("Server ready")
