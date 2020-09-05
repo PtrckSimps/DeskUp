@@ -31,42 +31,44 @@ app.get('/', (req,res) =>{
     //access the homepage
 
     // not logged in visitor
-    res.render('index.hbs')
+    // res.render('index.hbs')
     
     //logged in visitor
     //res.render('home.hbs')
 
-    // if(req.session.username){
-    //     res.render("home.hbs",{
-    //         username: req.session.username
-    //     })
-    // }else{
-    //     res.render("index.hbs") 
-    // }
+    if(req.session.username){
+        res.render("index.hbs",{
+            username: req.session.username
+        })
+    }else{
+        res.render("index.hbs", {
+            username: ""
+        }) 
+    }
 })
 
 app.post("/register", urlencoder, function(req, res){
-    // let username = req.body.un
-    // let password = req.body.pw
+    let username = req.body.un
+    let password = req.body.pw
 
-    // if(username.trim() == "" || password.trim() == ""){
-    //     res.render("register.hbs", {
-    //         error: "Enter a username and password"
-    //     })
-    // }else if(!isAvailable(username)){
-    //     res.render("register.hbs", {
-    //         error: "username is already taken"
-    //     })
-    // }else{
-    //     req.session.username = req.body.un
-    //     users.push({
-    //         username: username,
-    //         password: password
-    //     })
+    if(username.trim() == "" || password.trim() == ""){
+        res.render("register.hbs", {
+            error: "Enter a username and password"
+        })
+    }else if(!isAvailable(username)){
+        res.render("register.hbs", {
+            error: "username is already taken"
+        })
+    }else{
+        req.session.username = req.body.un
+        users.push({
+            username: username,
+            password: password
+        })
 
-    //     res.redirect("/")
-    // }
-    res.render('home.hbs')
+        res.redirect("/")
+    }
+    // res.render('home.hbs')
 })
 
 function isAvailable(username){
@@ -79,16 +81,18 @@ function isAvailable(username){
 }
 
 app.post("/login", urlencoder, function(req, res){
-    // if(!matches(req.body.un, req.body.pw)){
-    //     res.render("login.hbs", {
-    //         error: "not match"
-    //     })
-    // }else{
-    //     res.render("home.hbs",{
-    //         username: req.body.un
-    //     })
-    // }
-    res.render('home.hbs')
+    if(!matches(req.body.un, req.body.pw)){
+        res.render("login.hbs", {
+            error: "not match"
+        })
+    }else{
+        // res.render("index.hbs",{
+        //     username: req.body.un
+        // })
+        req.session.username = req.body.un
+        res.redirect("/")
+    }
+    // res.render('home.hbs')
 })
 
 function matches(username, password){
@@ -101,23 +105,29 @@ function matches(username, password){
 }
 
 app.get("/signout", urlencoder, (req, res) =>{
-    // req.session.destroy()
+    req.session.destroy()
     res.redirect("/")
 })
 
 app.get("/reviews", function(req, res){
     //User goes to Categories page
-    res.render('reviews.hbs')
+    res.render('reviews.hbs', {
+        username: req.session.username
+    })
 })
 
 app.get('/featured', (req,res) =>{
     //User goes to Featured page
-    res.render('featured.hbs')
+    res.render('featured.hbs', {
+        username: req.session.username
+    })
 })
 
 app.get('/categories', (req,res) =>{
     //User goes to Categories page
-    res.render('categories.hbs')
+    res.render('categories.hbs', {
+        username: req.session.username
+    })
 })
 
 // app.get("/logreg", function(req, res){
@@ -139,7 +149,9 @@ app.get("/ReviewPost", urlencoder, function(req, res){
     //get post id
     
     //if not logged
-    res.render('reviewPost.hbs')
+    res.render('reviewPost.hbs', {
+        username: req.session.username
+    })
 
     //else
     // res.render('reviewPostUser.hbs')
@@ -147,11 +159,15 @@ app.get("/ReviewPost", urlencoder, function(req, res){
 
 app.get("/manage-post", function(req, res){
     //Going to register page
-    res.render('managepost.hbs')
+    res.render('managepost.hbs', {
+        username: req.session.username
+    })
 })
 
 app.get("/monitorCategory" , function(req, res) {
-    res.render('monitorCategory.hbs')
+    res.render('monitorCategory.hbs', {
+        username: req.session.username
+    })
 })
 
 
