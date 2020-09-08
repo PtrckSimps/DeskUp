@@ -43,33 +43,45 @@
                     </li>
                 </ul>
 
-                <form action="#">
-                    <input type="search" class="search-data" placeholder="Search" required>
+                <form action="searchResult" method="GET">
+                    <input type="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
-                {{#if username}}
+                {{#if admin}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                            <i class="fas fa-user"></i>{{username}}
+                            <i class="fas fa-user"></i>Admin
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="" id="dropdowntext">Profile</a>
+                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="manage-users" id="dropdowntext">Manage Users</a>
                             <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
-                    </p>
-                    {{else}}
-                        <div class="btn-group">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                                <i class="fas fa-user"></i>Account
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
-                                <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
-                            </div>
+                {{else if username}}
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
+                            <i class="fas fa-user"></i>{{username}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="manage-post" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
+                    </div>
+                {{else}}
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
+                            <i class="fas fa-user"></i>Account
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
+                            <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                        </div>
+                    </div>
                 {{/if}}
         </nav>
 

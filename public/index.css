@@ -762,3 +762,60 @@ div.error{
   font-size: 1.5rem;
   color: #2397cc;
 }
+
+
+/* search result */
+
+#marginclass .search .row .headerSearch{
+  border-bottom: 1px solid black;
+}
+
+#marginclass .search .row .headerSearch h3{
+  font-weight: 700;
+}
+
+
+
+
+#marginclass .search .filter h4{
+  margin-top:10px;
+  padding-left:10px;
+  background-color: #414141;
+  color:white;
+  font-size: 1.5rem;
+}
+
+
+#marginclass .search .filter h5{
+font-weight: 700;
+margin-left:10px;
+}
+
+#marginclass .search .filter {
+  background-color: #d1d1d1a2;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px;
+
+  
+}
+
+#marginclass .search .filter .filterbuttons{
+margin-left:0px;
+margin-bottom:10px;
+  
+}
+
+
+
+#marginclass .search .filter .dropdown-menu a{
+text-decoration: none;
+color:black;
+margin-left:5px;
+    
+}
+
+#marginclass .search .filter .dropdown-menu li:hover{
+  text-decoration: none;
+  color:black;
+  background-color:rgb(170, 170, 170);
+      
+  }

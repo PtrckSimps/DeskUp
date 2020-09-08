@@ -34,34 +34,46 @@
                     </li>
                 </ul>
                 
-                <form action="#">
-                    <input type="search" class="search-data" placeholder="Search" required>
+                <form action="searchResult" method="GET">
+                    <input type="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
 
-                {{#if username}}
+                {{#if admin}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                            <i class="fas fa-user"></i>{{username}}
+                            <i class="fas fa-user"></i>Admin
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="" id="dropdowntext">Profile</a>
+                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="manage-users" id="dropdowntext">Manage Users</a>
                             <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
-                    </p>
-                    {{else}}
-                        <div class="btn-group">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                                <i class="fas fa-user"></i>Account
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
-                                <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
-                            </div>
+                {{else if username}}
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
+                            <i class="fas fa-user"></i>{{username}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="manage-post" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
+                    </div>
+                {{else}}
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
+                            <i class="fas fa-user"></i>Account
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
+                            <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                        </div>
+                    </div>
                 {{/if}}
             </div>
         </nav>
@@ -157,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                {{#if username}}
+                {{#if admin}}
                     <div class="container mb-5">
                         <p class="comments">Comments</p>
                         <form action="comment" method="POST">
@@ -176,9 +188,8 @@
                                 <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
                                 <div class="comment-footer"> 
                                     <span class="text-muted float-right">August 14, 2020</span> 
-                                    {{!-- <button type="button" class="btn btn-info btn-sm">Edit</button> 
-                                    <button type="button" class="btn btn-success btn-sm">Publish</button> 
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button> --}}
+                                    <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                    <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
                                 </div>            
                             </div>
 
@@ -190,9 +201,8 @@
                                 <h6 class="font-medium">Michael Hussey</h6> <span class="m-b-15 d-block">I have the same product and its great!. </span>
                                 <div class="comment-footer"> 
                                     <span class="text-muted float-right">August31, 2020</span> 
-                                    {{!-- <button type="button" class="btn btn-info btn-sm">Edit</button> 
-                                    <button type="button" class="btn btn-success btn-sm">Publish</button>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>  --}}
+                                    <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                    <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -203,9 +213,52 @@
                                 <h6 class="font-medium">Johnathan Doeting</h6> <span class="m-b-15 d-block">Thanks for the wonderful review. </span>
                                 <div class="comment-footer"> 
                                     <span class="text-muted float-right">September 3, 2020</span> 
-                                    {{!-- <button type="button" class="btn btn-info btn-sm">Edit</button> 
-                                    <button type="button" class="btn btn-success btn-sm">Publish</button> 
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>  --}}
+                                    <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                    <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{else if username}}
+                                        <div class="container mb-5">
+                        <p class="comments">Comments</p>
+                        <form action="comment" method="POST">
+                            <div class="d-flex flex-row">
+                                {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
+                                <input class="commentNow" type="tex" id="comment" name="comment" placeholder="Write a comment..."></input>
+                            </div> 
+                            <div class="row d-flex justify-content-end">
+                                <button type="submit" class="commentLoginbutton">Comment</button>
+                                {{!-- <a href="/login" style="color: white; text-decoration: none">Comment</a> --}}
+                            </div>
+                        </form>
+                        <div class="d-flex flex-row comment-row m-t-0">
+                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text w-100">
+                                <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
+                                <div class="comment-footer"> 
+                                    <span class="text-muted float-right">August 14, 2020</span> 
+                                </div>            
+                            </div>
+
+                        </div> 
+
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text active w-100">
+                                <h6 class="font-medium">Michael Hussey</h6> <span class="m-b-15 d-block">I have the same product and its great!. </span>
+                                <div class="comment-footer"> 
+                                    <span class="text-muted float-right">August31, 2020</span> 
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                <div class="comment-text w-100">
+                                <h6 class="font-medium">Johnathan Doeting</h6> <span class="m-b-15 d-block">Thanks for the wonderful review. </span>
+                                <div class="comment-footer"> 
+                                    <span class="text-muted float-right">September 3, 2020</span> 
                                 </div>
                             </div>
                         </div>
@@ -250,7 +303,50 @@
                 {{/if}}
             </div>
         </div>
-
+        {{!-- EDIT MODAL --}}
+        <div class="modal fade" id="editComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group">
+                        <textarea class="form-control" id="message-text" placeholder="Edit your comment..."></textarea>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Edit</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        {{!-- DELETE MODAL --}}
+        <div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your comment?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="" class="btn btn-danger">Delete</a>
+                </div>
+                </div>
+            </div>
+        </div>
         <div class="mt-5 pt-4 pb-3 footer">
             <div class="container">
                 <div class="row">
