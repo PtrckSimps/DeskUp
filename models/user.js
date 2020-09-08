@@ -11,8 +11,35 @@ const crypto = require("crypto")
 
 var userSchema = mongoose.Schema({
     username: String,
-    password: String
+    name: String,
+    password: String,
+    picture: String,
+    role: String,
+    post:[
+        {
+            content: String,
+            date: Date
+        }
+    ]
 })
+
+// users: [
+//   {
+//       id: ObjectID(),
+//       username: String,
+//       name: String,
+//       password: String,
+//       picture: String,
+//       role: String,
+//       post:[
+//           {
+//               _id: ObjectID(),
+//               content: String,
+//               date: Date
+//           }
+//       ]
+//   }
+// ]
 
 userSchema.pre("save", function(next){
   this.password = crypto.createHash("md5").update(this.password).digest("hex")

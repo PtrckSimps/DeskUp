@@ -159,7 +159,14 @@ router.get('/categories', (req,res) =>{
 })
 
 router.get("/user-profile" , function(req, res) {
-    res.render('monitorCategory.hbs', {
+    res.render('userprofile.hbs', {
+        username: req.session.username,
+        admin: req.session.admin
+    })
+})
+
+router.post("/update-profile" , urlencoder, function(req, res) {
+    res.render('userprofile.hbs', {
         username: req.session.username,
         admin: req.session.admin
     })
