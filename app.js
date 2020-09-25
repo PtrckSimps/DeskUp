@@ -15,7 +15,7 @@ const path = require("path")
 const app = express()
 
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost:27017/deskUp-db", {
+mongoose.connect("mongodb+srv://DeskUp-User:DeskUp-User1224@cluster0.o3pdp.mongodb.net/DeskUp-db?retryWrites=true&w=majority", {
     useNewUrlParser:true,
     useUnifiedTopology: true
 })
@@ -41,3 +41,4 @@ app.use(require("./controllers"))
 app.listen(3000, ()=> { 
     console.log("Server ready")
 })
+
