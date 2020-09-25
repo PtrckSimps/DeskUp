@@ -127,7 +127,7 @@ router.post("/add-review", urlencoder, function(req, res){
         role : req.session.role
     }
 
-    let momentdate = moment().format('MMMM Do YYYY');
+    let momentdate = moment().format('MMMM DD YYYY');
     // console.log("date is "+ test)
     let review = {
         title: req.body.title,
