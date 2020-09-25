@@ -159,7 +159,7 @@ router.post("/add-review", urlencoder, function(req, res){
     User.insert(req.session.username, review).then((doc) =>{
         console.log("Review added in the user's review")
     })
-
+    
     res.redirect('manage-reviews')
 })
 
