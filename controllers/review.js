@@ -71,7 +71,7 @@ router.get('/searchResult', urlencoder, (req,res) =>{
         username: req.session.username,
         role : req.session.role
     }
-    res.render('searchresult.hbs', {
+    res.render('search.hbs', {
         user
     })
 })
