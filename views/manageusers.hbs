@@ -242,9 +242,11 @@
         $(document).ready(function(){
                 $("button#editButton").click(function(){
                     let id=$(this).attr("data-id")
+                    let tile =$(div#title).attr("data-id")
                     $("input#edit_id").val(id)
             })
         })
+
         $(document).ready(function(){
                 $("button#deleteButton").click(function(){
                     let id=$(this).attr("data-id")

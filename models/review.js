@@ -77,7 +77,6 @@ exports.create = function(review){
   })
 }
 
-
 exports.all = function(){
   return new Promise(function(resolve, reject){
       Review.find({}).then((review)=>{
@@ -88,10 +87,10 @@ exports.all = function(){
   })
 }
 
-exports.review = function(id){
+exports.review = function(title){
   return new Promise(function(resolve, reject){
-      Review.findOne({_id: id}).then((review)=>{
-          resolve(review)
+      Review.findOne({title: title}).then((review)=>{
+        resolve(review)
       }, (err)=>{
           reject(err)
       })

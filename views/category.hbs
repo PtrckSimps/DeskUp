@@ -106,15 +106,15 @@
                 {{#each reviews}}
                 <div data-id="{{_id}}"class="col-md-6 featuredColmd6">
                     <img src="{{primaryImage}}" class="img-responsive featuredIMG">
-                    <p class="articleTitle"><a class="viewReview" data-id="{{title}}" style="color: #212529">{{title}}</a></p>
+                    <p class="articleTitle"><a class="viewReview" title="{{title}}" data-id="{{title}}" style="color: #212529">{{title}}</a></p>
                     <p class="articleDetails">by {{author}}. {{date}}</p>
                     <p class="articlePreview">{{content}}
                     </p>
                 </div>
                 {{/each}}
                 {{/with}} 
-                <form id="rev_form" method="post" action="/review/ReviewPostC">
-                    <input type="hidden" name="revtitle" id="revtitle">
+                <form id="rev_form" method="post" action="/review/ReviewPost">
+                    <input type="hidden" name="revid" id="revid">
                 </form>
             </div>       
         </div>
@@ -154,8 +154,9 @@
         $(document).ready(function(){
                 $(".viewReview").click(function(){
                     let id=$(this).attr("data-id")
-                    $("input#revtitle").val(id)
-                    console.log(id)
+                    let title=$(this).attr("title")
+                    $("input#revid").val(title)
+                    $("form#rev_form").attr("action", "/review/ReviewPost/" + title)
                     $("form#rev_form").submit()
                 })
             })

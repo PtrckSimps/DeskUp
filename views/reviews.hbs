@@ -99,7 +99,6 @@
                         </span>
                     </div>
                 </div>
-                
                 {{#each review}}
                 <div data-id="{{_id}}">
                 <div class="row mt-4 contentRowReviews">
@@ -125,13 +124,13 @@
                         <div class="articlePreview">{{content}}
                         
                         </div>
-                        <a class="readmore"  data-id="{{_id}}" id="readmore">Read more</a>
+                        <a class="readmore" title="{{title}}" data-id="{{_id}}" id="readmore">Read more</a>
                         {{!-- <a class="readmore" id="readmore" href="review/ReviewPost">Read more</a> --}}
                     </div>
                 </div>
                 </div>
                 {{/each}}
-                <form id="rev_form" method="post" action="review/ReviewPost">
+                <form id="rev_form" method="post" action="">
                     <input type="hidden" name="revid" id="revid">
                 </form>
                 {{!-- <div class="row mt-4 contentRowReviews">
@@ -219,8 +218,9 @@
         $(document).ready(function(){
                 $(".readmore").click(function(){
                     let id=$(this).attr("data-id")
-                    $("input#revid").val(id)
-                    console.log(id)
+                    let title=$(this).attr("title")
+                    $("input#revid").val(title)
+                    $("form#rev_form").attr("action", "review/ReviewPost/" + title)
                     $("form#rev_form").submit()
                 })
             })

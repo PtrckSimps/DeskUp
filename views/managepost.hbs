@@ -105,7 +105,7 @@
                                 <div class="modal-body">
                                     <form method="Post" action="add-review">
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Primary Image:</label>
+<label for="recipient-name" class="col-form-label">Primary Image: (Required Format: <b>https://drive.google.com/uc?id=</b><i>link-id</i>)</label>
                                                 <input type="text"  class="form-control" name="primaryImage" id="primaryImage">
                                         </div>
                                         <div class="form-group">
@@ -117,7 +117,7 @@
                                             <textarea class="form-control" name="content" id="content"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Secondary image:</label>
+                                            <label for="recipient-name" class="col-form-label">Secondary image: (Required Format: <b>https://drive.google.com/uc?id=</b><i>link-id</i>)</label>
                                             <input type="text" class="form-control" name="secondaryImage" id="secondaryImage">
                                         </div>
                                         <div class="form-group">
@@ -224,6 +224,7 @@
                                 <p class="articleDetails">by {{author}}. {{date}}</p>
                             </div>
                             <div class="col-md-2">
+                                
                                 <button type="button" class="btn btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deletePost">Delete</button>
                                 <button type="button" class="btn btn-outline-dark btn-sm float-right mr-2" data-toggle="modal" data-target="#editPost">edit</button>
                             </div> 
@@ -235,54 +236,6 @@
                 </div>
                 </div>
                 {{/each}}
-                {{!-- <div class="row pt-3 mng-post-row">
-                    <div class="col-md-12 border-bottom">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <p class="postTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deletePost">Delete</button>
-                                <button type="button" class="btn btn-outline-dark btn-sm float-right mr-2" data-toggle="modal" data-target="#editPost">edit</button>
-                            </div> 
-                        </div>
-                        <p class="postPreview">As technology becomes more and more advanced, there's a lot of options for 
-                        Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors...
-                        </p>
-                    </div>
-                </div>
-                <div class="row pt-3 mng-post-row">
-                    <div class="col-md-12 border-bottom">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <p class="postTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deletePost">Delete</button>
-                                <button type="button" class="btn btn-outline-dark btn-sm float-right mr-2" data-toggle="modal" data-target="#editPost">edit</button>
-                            </div> 
-                        </div>
-                        <p class="postPreview">As technology becomes more and more advanced, there's a lot of options for 
-                        Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors...
-                        </p>
-                    </div>
-                </div>
-                <div class="row pt-3 mng-post-row">
-                    <div class="col-md-12 border-bottom">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <p class="postTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#deletePost">Delete</button>
-                                <button type="button" class="btn btn-outline-dark btn-sm float-right mr-2" data-toggle="modal" data-target="#editPost">edit</button>
-                            </div> 
-                        </div>
-                        <p class="postPreview">As technology becomes more and more advanced, there's a lot of options for 
-                        Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors...
-                        </p>
-                    </div>
-                </div> --}}
             </div>
         </div>
 

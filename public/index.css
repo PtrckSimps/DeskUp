@@ -570,8 +570,10 @@ section.main-highlight, .carousel-item{
   height: auto;
 }
 
-.carousel-item p, .carousel-item h5, .carousel-item h6 {
+.carousel-item p, .carousel-item h5, .carousel-item h6, .carousel-item h5 a{
   text-align: justify;
+  color:white;
+  text-decoration: none;
 }
 
 .carousel-item h5 {

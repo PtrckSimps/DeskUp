@@ -20,24 +20,25 @@ router.get("/", function(req, res){
         username: req.session.username,
         role : req.session.role
     }
-    Review.all().then((doc)=>{
+    console.log("got herem")
+    Review.all().then((docs)=>{
         res.render('reviews.hbs', {
-            user, review : doc
+            user, review : docs
         })
     })
 })
 
-router.post("/ReviewPost", urlencoder, function(req, res){
+router.post("/ReviewPost/:title", urlencoder, function(req, res){
     //user want to view review post
     let user = {
         username: req.session.username,
         role : req.session.role
     }
 
-    let id = req.body.revid
-    console.log(id)
+    let title = req.body.revid
+    console.log(title)
 
-    Review.review(id).then((doc)=>{
+    Review.review(title).then((doc)=>{
         console.log(doc)
         res.render('reviewpost.hbs', {
             user, review: doc
@@ -97,7 +98,6 @@ router.get("/manage-reviews", function(req, res){
                     user, reviews : docs, categories: categories
                 })
             })
-            
         })
     }
     
@@ -128,6 +128,7 @@ router.post("/add-review", urlencoder, function(req, res){
     }
 
     let momentdate = moment().format('MMMM DD YYYY');
+    
     // console.log("date is "+ test)
     let review = {
         title: req.body.title,
