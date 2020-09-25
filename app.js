@@ -9,15 +9,17 @@ app.js starts the server
 const express = require("express")
 const bodyparser = require("body-parser")
 const hbs = require("hbs")
-// const mongoose = require("mongoose")
+const mongoose = require("mongoose")
 const session = require("express-session")
-
+const path = require("path")
 const app = express()
 
-// mongoose.Promise = global.Promise
-// mongoose.connect("mongodb://localhost:27017//*database -name*/", {
-//     useNewUrlParser:true
-// })
+mongoose.Promise = global.Promise
+mongoose.connect("mongodb://localhost:27017/deskUp-db", {
+    useNewUrlParser:true,
+    useUnifiedTopology: true
+})
+mongoose.set('useFindAndModify', false);
 
 app.set("view engine", "hbs")
 app.use(express.static(__dirname + "/public"))
@@ -30,7 +32,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie:{
-        maxAge: 1000 * 60 * 60
+        maxAge: 1000 * 60 * 60 * 60
     }
 }))
 

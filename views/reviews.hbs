@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr"> 
     <head>
         <meta charset="utf-8">
         <title>DeskUp - It's Worth it</title>
-        <link rel="stylesheet" href="index.css">
+        <link rel="icon" href="/images/boxLogo.png">
+        <link rel="stylesheet" href="/index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
+    <div class="mainContainer">
         <nav class="navbar navbar-expand-md fixed-top animated ">
             <a class="navbar-brand logo" href="/">
-                <span>DeskUp</span>
+                <img src="/images/logo5.png" class="NavLogo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -24,42 +26,39 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/reviews">Reviews</a>
+                        <a class="nav-link" href="review">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/featured">Featured</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">Categories</a>
+                        <a class="nav-link" href="category">Categories</a>
                     </li>
                 </ul>
                 
-                <form action="searchResult" method="GET">
+                <form action="review/searchResult" method="GET">
                     <input type="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
 
-                {{#if admin}}
+                {{#ifEquals user.role "admin"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Admin
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-users" id="dropdowntext">Manage Users</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="user/manage-users" id="dropdowntext">Manage Users</a>
+                            <a class="dropdown-item" href="review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
-                {{else if username}}
+                {{else}} {{#ifEquals user.role "user"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                            <i class="fas fa-user"></i>{{username}}
+                            <i class="fas fa-user"></i>{{user.username}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
@@ -69,12 +68,12 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Account
                         </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
-                            <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="user/login" id="dropdowntext">Login</a>
+                            <a class="dropdown-item" href="user/register" id="dropdowntext">Register</a>
                         </div>
                     </div>
-                {{/if}}
+                {{/ifEquals}} {{/ifEquals}}
             </div>
         </nav>
 
@@ -87,7 +86,7 @@
                     </ol>
                 </nav>
 
-                <div class="row headerRowFeatured">
+                <div class="row mb-5 headerRowFeatured">
                     <div class="col-md-5">
                         <h1 class="featuredText">Reviews</h1>
                     </div>
@@ -101,9 +100,11 @@
                     </div>
                 </div>
                 
-                <div class="row contentRowReviews">
+                {{#each review}}
+                <div data-id="{{_id}}">
+                <div class="row mt-4 contentRowReviews">
                     <div class="col-md-6 col-md-6-Padding">
-                        <img src="images/lgUW.png" class="img-responsive featuredIMG">
+                        <img src="{{primaryImage}}" class="img-responsive reviewIMG">
                     </div>
 
                     <div class="col-md-6 col-md-6-Padding">
@@ -114,22 +115,28 @@
                             </div>
                             <div class="col">
                                 <div class="progress" id="score" style="height: 20px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="25" aria-valuemin="50" aria-valuemax="100" id="scoreValue">8.8</div>
+                                    <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="25" aria-valuemin="50" aria-valuemax="100" id="scoreValue">{{score}}</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <p class="articleTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
-                        <p class="articleDetails">by Patrick Lawrence. August 31, 2020</p>
-                        <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
-                        Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors... <a id="readmore" href="/ReviewPost">Read more</a>
-                        </p>
+                        <p class="articleTitle">{{title}}</p>
+                        <p class="articleDetails">by {{author}}. {{date}}</p>
+                        <div class="articlePreview">{{content}}
+                        
+                        </div>
+                        <a class="readmore"  data-id="{{_id}}" id="readmore">Read more</a>
+                        {{!-- <a class="readmore" id="readmore" href="review/ReviewPost">Read more</a> --}}
                     </div>
                 </div>
-
-                <div class="row contentRowReviews">
+                </div>
+                {{/each}}
+                <form id="rev_form" method="post" action="review/ReviewPost">
+                    <input type="hidden" name="revid" id="revid">
+                </form>
+                {{!-- <div class="row mt-4 contentRowReviews">
                     <div class="col-md-6 col-md-6-Padding">
-                        <img src="images/wfm2.jpg" class="img-responsive featuredIMG">
+                        <img src="/images/keyboard.jpg" class="img-responsive reviewIMG">
                     </div>
 
                     <div class="col-md-6 col-md-6-Padding">
@@ -143,13 +150,13 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="articleTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
+                        <p class="articleTitle">Keychron K2 Wireless Mechanial keyboard</p>
                         <p class="articleDetails">by Patrick Lawrence. August 31, 2020</p>
-                        <p class="articlePreview">As technology becomes more and more advanced, there's a lot of options for 
-                        Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors... <a id="readmore" href="/ReviewPost">Read more</a>
+                        <p class="articlePreview">K2 is a super tactile wireless or wired keyboard giving you all the keys and function you need while keeping it compact, 
+                            with the largest battery seen in a mechanical keyboard.... <a id="readmore" href="review/ReviewPost">Read more</a>
                         </p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -171,7 +178,8 @@
                 </div>
             </div>
         </div> --}}
-        <div class="mt-5 pt-4 pb-3 footer">
+    </div>
+        <div class="mt-5 pt-4 pb-3 footer stickyFooter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-xs-12 about-company">
@@ -207,5 +215,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script>
+        $(document).ready(function(){
+                $(".readmore").click(function(){
+                    let id=$(this).attr("data-id")
+                    $("input#revid").val(id)
+                    console.log(id)
+                    $("form#rev_form").submit()
+                })
+            })
+    </script>
 </html>

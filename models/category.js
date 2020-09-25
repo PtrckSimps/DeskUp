@@ -8,11 +8,25 @@ Model files must be created independent of each other. Deleting one model file w
 
 const mongoose = require("mongoose")
 
+var reviewSchema = mongoose.Schema({
+    title: String,
+    author: String,
+    date: String,
+    content: String,
+    primaryImage: String   
+})
+
 var categorySchema = mongoose.Schema({
     name: String,
+    description: String,
     picture: String,
-    icon: String
+    icon: String,
+    reviews:[
+      reviewSchema  
+    ]
 })
+
+
 
 // category: [
 //   {
@@ -27,12 +41,41 @@ var Category = mongoose.model("category", categorySchema)
 
 exports.create = function(category){
   return new Promise(function(resolve, reject){
-    var c = new Cateegory(category)
-
+    var c = new Category(category)
     c.save().then((newCategory)=>{
       resolve(newCategory)
     }, (err)=>{
       reject(err)
     })
+  })
+}
+
+exports.all = function(){
+  return new Promise(function(resolve, reject){
+      Category.find({}).then((category)=>{
+          resolve(category)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.specific = function(name){
+  return new Promise(function(resolve, reject){
+      Category.findOne({name: name}).then((category)=>{
+          resolve(category)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.insert = function(name, review){
+  return new Promise(function(resolve, reject){
+      Category.findOneAndUpdate({name: name},{ $push: {reviews: review}}).then((category)=>{
+          resolve(category)
+      }, (err)=>{
+          reject(err)
+      })
   })
 }

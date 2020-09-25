@@ -3,16 +3,18 @@
     <head>
         <meta charset="utf-8">
         <title>DeskUp - Article Title</title>
-        <link rel="stylesheet" href="index.css">
+        <link rel="icon" href="/images/boxLogo.png">
+        <link rel="stylesheet" href="/index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
+    <div class="mainContainer">
         <nav class="navbar navbar-expand-md fixed-top animated ">
             <a class="navbar-brand logo" href="/">
-                <span>DeskUp</span>
+                <img src="/images/logo5.png" class="NavLogo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -24,44 +26,41 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/reviews">Reviews</a>
+                        <a class="nav-link" href="/review">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/featured">Featured</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">Categories</a>
+                        <a class="nav-link" href="/category">Categories</a>
                     </li>
                 </ul>
                 
-                <form action="searchResult" method="GET">
+                <form action="/review/searchResult" method="GET">
                     <input type="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
 
-                {{#if admin}}
+                {{#ifEquals user.role "admin"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Admin
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-users" id="dropdowntext">Manage Users</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="/user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="/user/manage-users" id="dropdowntext">Manage Users</a>
+                            <a class="dropdown-item" href="/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
+                            <a class="dropdown-item" href="/signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
-                {{else if username}}
+                {{else}} {{#ifEquals user.role "user"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                            <i class="fas fa-user"></i>{{username}}
+                            <i class="fas fa-user"></i>{{user.username}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="/user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="/review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
+                            <a class="dropdown-item" href="/signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
                 {{else}}
@@ -69,34 +68,35 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Account
                         </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
-                            <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="/user/login" id="dropdowntext">Login</a>
+                            <a class="dropdown-item" href="/user/register" id="dropdowntext">Register</a>
                         </div>
                     </div>
-                {{/if}}
+                {{/ifEquals}} {{/ifEquals}}
             </div>
         </nav>
 
         <div class="content" id="marginclass">
-            <div                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     class="container" >
+            <div class="container">
+                {{#with review}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                 <nav aria-label="breadcrumb" >
                     <ol class="breadcrumb" id="breadcrumbBG">
                         <li class="breadcrumb-item"><a href="/" id="breadcrumbItemColor">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/reviews" id="breadcrumbItemColor">Reviews</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">LG's stunning 38-inch UltraWide 38UC99-W Monitor</li>
+                        <li class="breadcrumb-item"><a href="/review" id="breadcrumbItemColor">Reviews</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{title}}</li>
                     </ol>
                 </nav>
                 <div class="row" >
                     <div class="col-12 m-auto">
-                        <img src="images/lgUW.png" class="img-responsive featuredIMG">
+                        <img src="{{primaryImage}}" class="img-responsive reviewPostIMG">
                     </div>
                 </div>
                 
                 <div class="row">
                     <div class="col-8 m-auto">
-                        <p class="articleTitle">LG's stunning 38-inch UltraWide 38UC99-W Monitor</p>
-                        <p class="articleDetails">by Patrick Lawrence. August 31, 2020</p>
+                        <p class="articleTitle">{{title}}</p>
+                        <p class="articleDetails">by {{author}}. {{date}}</p>
                     </div>
 
                     <div class="col-4 mt-2">
@@ -106,7 +106,7 @@
                             </div>
                             <div class="col">
                                 <div class="progress" id="score" style="height: 20px;">
-                                    <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="25" aria-valuemin="50" aria-valuemax="100" id="scoreValue">8.8</div>
+                                    <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="25" aria-valuemin="50" aria-valuemax="100" id="scoreValue">{{score}}</div>
                                 </div>
                             </div>
                         </div>
@@ -114,62 +114,78 @@
                 </div>
                 <div class="row">
                     <div class="col-12 m-auto">
-                        <div class="reviewText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero. Praesent sed ultricies 
-                            enim. Etiam lobortis velit in lectus semper malesuada. Mauris tincidunt aliquam orci eu finibus. Nam id libero mattis, tincidunt nisl eu, aliquam arcu. Vestibulum 
-                            at dictum ex. Nulla facilisi. Fusce sagittis porttitor felis tempor rhoncus. Integer pretium nibh a massa condimentum ullamcorper. Sed nulla nisl, aliquam vel 
-                            feugiat sed, porta id magna. Ut tincidunt metus et tristique porttitor. Nunc pulvinar congue condimentum. Sed pretium lorem nisl, ac ullamcorper erat fringilla 
-                            convallis. Nunc consequat placerat turpis et venenatis. Aenean consequat pulvinar dui ac sollicitudin. Pellentesque faucibus libero ut massa tristique, vitae 
-                            placerat nulla suscipit. Mauris at scelerisque elit. In hac habitasse platea dictumst.
+                        <div class="reviewText">{{content}}
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
+                {{!-- <div class="row mb-4">
                     <div class="col-12">
-                        <img src="images/curved.jpg" class="img-responsive featuredIMG">
+                        <img src="/images/curved.jpg" class="img-responsive reviewPostIMG">
                     </div>
-                </div>
+                </div> --}}
                 <div class="row mb-4">
                     <div class="col-6 m-auto">
                         <p class="specificationsHeading">Specifications</p>
-                        <p class="specs reviewText">Name: LG 38UC99-W <br> Screen size: 37.5" Curved <br> Resolution: 3840 x 1600 <br> Refresh Rate: 60 Hz / 75Hz with Display Port with FreeSync 
+                        {{!-- <p class="specs reviewText">Name: LG 38UC99-W <br> Screen size: 37.5" Curved <br> Resolution: 3840 x 1600 <br> Refresh Rate: 60 Hz / 75Hz with Display Port with FreeSync 
                             <br> Panel Type: IPS <br>  sRGb over 99% <br>  1ms Motion Blur Reduction <br> USB Type-C™ & USB 3.0 Quick Charge <br> Bluetooth Speakers with Rich Bass                  
-                        </p>
+                        </p> --}}
+                        <ul class="speclist">
+                            {{#each specs}}
+                            <li class="specs reviewText">{{this}}</li>              
+                            {{/each}}
+                        </ul>
+                        
                         <a href=""></a><div class="buyNow">Buy Now</div></a>
                     </div>
 
                     <div class="col-6 reviewborderleft">
-                        <img src="images/lgmonitor.jpg" class="img-responsive featuredIMG">
+                        <img src="{{secondaryImage}}" class="img-responsive reviewPostIMG2">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 m-auto border-top border-bottom">
-                        <p class="ArticleHeadings">Pros</p>
-                        <ul class="prosList">
+                    <div class="col-6 m-auto border-top border-bottom">
+                        <p class="ArticleHeadings">The Good</p>
+                            <div class="reviewText">{{pros}}
+                            </div>
+                        {{!-- <ul class="prosList">
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                        </ul>
-                        <p class="ArticleHeadings">Cons</p>
-                        <ul class="prosList">
+                        </ul> --}}
+                        {{!-- <ul class="prosList">
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                        </ul>
+                        </ul> --}}
+                            
+                    </div>
+                    <div class="col-6 m-auto border-top border-bottom">
+                        <p class="ArticleHeadings">Not so Good</p>
+                            <div class="reviewText">{{cons}}
+                            </div>
+                        {{!-- <ul class="prosList">
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
+                        </ul> --}}
+                        
+                        {{!-- <ul class="prosList">
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
+                        </ul> --}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 m-auto border-bottom">
                         <p class="ArticleHeadings">Verdict</p>
-                        <div class="reviewText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero. Praesent sed ultricies 
-                            enim. Etiam lobortis velit in lectus semper malesuada. Mauris tincidunt aliquam orci eu finibus. Nam id libero mattis, tincidunt nisl eu, aliquam arcu. Vestibulum 
-                            at dictum ex. Nulla facilisi. Fusce sagittis porttitor felis tempor rhoncus. Integer pretium nibh a massa condimentum ullamcorper. Sed nulla nisl, aliquam vel 
-                            feugiat sed, porta id magna. Ut tincidunt metus et tristique porttitor. Nunc pulvinar congue condimentum. Sed pretium lorem nisl, ac ullamcorper erat fringilla 
-                            convallis. Nunc consequat placerat turpis et venenatis. Aenean consequat pulvinar dui ac sollicitudin. Pellentesque faucibus libero ut massa tristique, vitae 
-                            placerat nulla suscipit. Mauris at scelerisque elit. In hac habitasse platea dictumst.
+                        <div class="reviewText">{{verdict}}
                         </div>
                     </div>
                 </div>
-                {{#if admin}}
+            {{/with}}
+        </div>
+                {{#ifEquals user.role "admin"}}
                     <div class="container mb-5">
                         <p class="comments">Comments</p>
                         <form action="comment" method="POST">
@@ -183,14 +199,14 @@
                             </div>
                         </form>
                         <div class="d-flex flex-row comment-row m-t-0">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+                            {{!-- <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div> --}}
                             <div class="comment-text w-100">
-                                <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
-                                <div class="comment-footer"> 
-                                    <span class="text-muted float-right">August 14, 2020</span> 
+                                <h6 class="font-medium">James Thomas</h6> <span class="text-muted float-right">August 14, 2020</span>  <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
+                                <div class="comment-footer float-right">                          
                                     <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                    <div class="divider"></div>
                                     <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
-                                </div>            
+                                </div>           
                             </div>
 
                         </div> 
@@ -198,10 +214,10 @@
                         <div class="d-flex flex-row comment-row">
                             <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg" alt="user" width="50" class="rounded-circle"></div>
                             <div class="comment-text active w-100">
-                                <h6 class="font-medium">Michael Hussey</h6> <span class="m-b-15 d-block">I have the same product and its great!. </span>
-                                <div class="comment-footer"> 
-                                    <span class="text-muted float-right">August31, 2020</span> 
+                                <h6 class="font-medium">Michael Hussey</h6> <span class="text-muted float-right">August31, 2020</span> <span class="m-b-15 d-block">I have the same product and its great!. </span>
+                                <div class="comment-footer float-right">                          
                                     <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                    <div class="divider"></div>
                                     <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
                                 </div>
                             </div>
@@ -210,16 +226,16 @@
                         <div class="d-flex flex-row comment-row">
                             <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="user" width="50" class="rounded-circle"></div>
                                 <div class="comment-text w-100">
-                                <h6 class="font-medium">Johnathan Doeting</h6> <span class="m-b-15 d-block">Thanks for the wonderful review. </span>
-                                <div class="comment-footer"> 
-                                    <span class="text-muted float-right">September 3, 2020</span> 
+                                <h6 class="font-medium">Johnathan Doeting</h6><span class="text-muted float-right">September 3, 2020</span> <span class="m-b-15 d-block">Thanks for the wonderful review. </span>
+                                <div class="comment-footer float-right">                          
                                     <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                    <div class="divider"></div>
                                     <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{else if username}}
+                    {{else}} {{#ifEquals user.role "user"}}
                                         <div class="container mb-5">
                         <p class="comments">Comments</p>
                         <form action="comment" method="POST">
@@ -271,8 +287,8 @@
                             <div class="commentNow">Login or Sign Up to leave a comment</div>
                         </div> 
                         <div class="row d-flex justify-content-end">
-                            <div class="commentLoginbutton"><a href="/login" style="color: white; text-decoration: none">Login</a></div>
-                            <div class="commentLoginbutton"><a href="/register" style="color: white; text-decoration: none">Sign Up</a></div>
+                            <div class="commentLoginbutton"><a href="/user/login" style="color: white; text-decoration: none">Login</a></div>
+                            <div class="commentLoginbutton"><a href="/user/register" style="color: white; text-decoration: none">Sign Up</a></div>
                         </div>
 
                         <div class="d-flex flex-row comment-row m-t-0">
@@ -300,8 +316,8 @@
                             </div>
                         </div>
                     </div>
-                {{/if}}
-            </div>
+                {{/ifEquals}} {{/ifEquals}}
+            
         </div>
         {{!-- EDIT MODAL --}}
         <div class="modal fade" id="editComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -347,7 +363,8 @@
                 </div>
             </div>
         </div>
-        <div class="mt-5 pt-4 pb-3 footer">
+    </div>
+        <div class="mt-5 pt-4 pb-3 footer stickyFooter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-xs-12 about-company">

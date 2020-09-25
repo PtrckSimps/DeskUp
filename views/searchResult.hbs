@@ -3,64 +3,62 @@
     <head>
         <meta charset="utf-8">
         <title>DeskUp - Article Title</title>
-        <link rel="stylesheet" href="index.css">
+        <link rel="icon" href="/images/boxLogo.png">
+        <link rel="stylesheet" href="/index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
+    <div class="mainContainer">
         <nav class="navbar navbar-expand-md fixed-top animated ">
             <a class="navbar-brand logo" href="/">
-                <span>DeskUp</span>
+                <img src="/images/logo5.png" class="NavLogo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/reviews">Reviews</a>
+                        <a class="nav-link" href="/review">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/featured">Featured</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">Categories</a>
+                        <a class="nav-link" href="/category">Categories</a>
                     </li>
                 </ul>
                 
-                <form action="searchResult" method="GET">
+                <form action="review/searchResult" method="GET">
                     <input type="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
-                {{#if admin}}
+                {{#ifEquals user.role "admin"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Admin
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-users" id="dropdowntext">Manage Users</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="/user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="/user/manage-users" id="dropdowntext">Manage Users</a>
+                            <a class="dropdown-item" href="/review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
-                {{else if username}}
+                {{else}} {{#ifEquals user.role "user"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                            <i class="fas fa-user"></i>{{username}}
+                            <i class="fas fa-user"></i>{{user.username}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="/user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="/review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
+                            <a class="dropdown-item" href="/signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
                 {{else}}
@@ -68,122 +66,99 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Account
                         </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
-                            <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="/user/login" id="dropdowntext">Login</a>
+                            <a class="dropdown-item" href="/user/register" id="dropdowntext">Register</a>
                         </div>
                     </div>
-                {{/if}}
+                {{/ifEquals}} {{/ifEquals}}
             </div>
         </nav>
-
-<div class="content" id="marginclass">
-    <div class="container search">
-        <div class="row">
-            <div class="col-12 m-auto headerSearch">
-                <h3>Search Results for  <span id="searchInput">"Monitor"</span></h3>
-            </div>
-        </div>
-
-        <div class ="row filter">
-        <div class="col-12">
-            <div class="row">
-                <div class="col-12">
-                    <h4>Refine Results</h4>
-                </div> 
-                <div class="col-6">
-            <h5>Filter by Article Type</h5>
-            </div>
-              <div class="col-6">
-            <h5>Sort by</h5>
-            </div>
-            </div>         
-        </div>
-     <div class="col-12">
-          <div class="row filterbuttons">
-              <div class="col-6">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-light active">
-                        <input type="radio" name="options" id="allPosts" autocomplete="off" checked> All 
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="featuredPosts" autocomplete="off"> Featured
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="reviewPosts" autocomplete="off"> Reviews
-                    </label>
+        <div class="content" id="marginclass">
+            <div class="container search">
+                <div class="row">
+                    <div class="col-12 m-auto headerSearch">
+                        <h3>Search Results for  <span id="searchInput">"Monitor"</span></h3>
                     </div>
                 </div>
-
-                 <div class="col-6">
-                    
-               <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Most Relevant
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li class="active"><a href="#" data-value="Most Relevant">Most Relevant</a></li>
-                        <li><a href="#" data-value="Most Recent">Most Recent</a></li>
-                       
-                    </ul>
+                <div class ="row filter">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Refine Results</h4>
+                            </div> 
+                            <div class="col-6">
+                                <h5>Filter by Article Type</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5>Sort by</h5>
+                            </div>
+                        </div>         
                     </div>
-                   
-                </div>
-    
-
-            </div>
-            </div>
-        </div>
-
-         <div class="row related">
-                    <div class="col-12 m-auto">
-                      
-
-                        <div class="row content">
-                            <div class="col-4 m-auto">
-                                <img src="images/lgUW.png" class="img-responsive featuredIMG">
-
+                    <div class="col-12">
+                        <div class="row filterbuttons">
+                            <div class="col-6">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-light active">
+                                        <input type="radio" name="options" id="allPosts" autocomplete="off" checked> All 
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="options" id="featuredPosts" autocomplete="off"> Featured
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="options" id="reviewPosts" autocomplete="off"> Reviews
+                                    </label>
+                                    </div>
                             </div>
-                            <div class="col-8 m-auto">
-                                <h3><a href="ReviewPost">LG's stunning 38-inch UltraWide Monitor</a></h3> 
-                                <span>by Patrick Simpao</span>
-                                <p>As technology becomes more and more advanced, there's a lot of options for 
-                                    Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.</p>
-                            </div>
-                        </div>
-
-
-                        
-                        <div class="row content">
-                            <div class="col-4 m-auto">
-                                <img src="images/dell.webp" class="img-responsive featuredIMG">
-                            </div>
-                            <div class="col-8 m-auto">
-                                <h3><a href="searchResult">Dell's affordable 27-inch Infinity Display Monitor</a></h3> 
-                                <span>by Marco Pangilinan</span>
-                                <p>Dell's 27-inch Infinity Display is here to satisfy your monitor needs! Check out our in-depth review of this 
-                                    stunning monitor to help you decide which monitor to buy for your next office setup upgrade
-                                </p>
+                            <div class="col-6">      
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Most Relevant
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li class="active"><a href="#" data-value="Most Relevant">Most Relevant</a></li>
+                                        <li><a href="#" data-value="Most Recent">Most Recent</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-        
-    </div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-  <div class="mt-5 pt-4 pb-3 footer">
+                <div class="row related">
+                            <div class="col-12 m-auto">
+                            
+                                <div class="row content">
+                                    <div class="col-4 m-auto">
+                                        <img src="/images/lgUW.png" class="img-responsive featuredIMG">
+                                    </div>
+                                    <div class="col-8 m-auto">
+                                        <h3><a href="ReviewPost">LG's stunning 38-inch UltraWide Monitor</a></h3> 
+                                        <span>by Patrick Simpao</span>
+                                        <p>As technology becomes more and more advanced, there's a lot of options for 
+                                            Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row content">
+                                    <div class="col-4 m-auto">
+                                        <img src="/images/dell.webp" class="img-responsive featuredIMG">
+                                    </div>
+                                    <div class="col-8 m-auto">
+                                        <h3><a href="searchResult">Dell's affordable 27-inch Infinity Display Monitor</a></h3> 
+                                        <span>by Marco Pangilinan</span>
+                                        <p>Dell's 27-inch Infinity Display is here to satisfy your monitor needs! Check out our in-depth review of this 
+                                            stunning monitor to help you decide which monitor to buy for your next office setup upgrade
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+            </div>
+        </div>
+        </div>
+        <div class="mt-5 pt-4 pb-3 footer stickyFooter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-xs-12 about-company">
@@ -214,7 +189,6 @@
                 </div>
             </div>
         </div>
-        
     </body>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

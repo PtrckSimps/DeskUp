@@ -19,11 +19,15 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
     "hbs": "^4.1.1",
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
+    "moment": "^2.29.0",
+    "mongoose": "^5.10.5",
     "owl.carousel": "^2.3.4",
     "path": "^0.12.7"
   }

@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>DeskUp - It's Worth it</title>
-        <link rel="stylesheet" href="index.css">
+        <link rel="icon" href="/images/boxLogo.png">
+        <link rel="stylesheet" href="/index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <script language="JavaScript" type="text/javascript" src="/js/jquery.js"></script>
@@ -11,9 +12,10 @@
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
+    <div class="mainContainer">
         <nav class="navbar navbar-expand-md fixed-top animated">
             <a class="navbar-brand logo" href="/">
-                <span>DeskUp</span>
+                <img src="/images/logo5.png" class="NavLogo">
             </a>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
@@ -25,22 +27,19 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/reviews">Reviews</a>
+                        <a class="nav-link" href="/review">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/featured">Featured</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">Categories</a>
+                        <a class="nav-link" href="/category">Categories</a>
                     </li>
                 </ul>
 
-                <form action="searchResult" method="GET">
+                <form action="/review/searchResult" method="GET">
                     <input type="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
                 
-                {{#if admin}}
+                {{#ifEquals user.role "admin"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Admin
@@ -48,21 +47,21 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
                             <a class="dropdown-item" href="manage-users" id="dropdowntext">Manage Users</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="/review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
+                            <a class="dropdown-item" href="/signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
-                {{else if username}}
+                {{else}} {{#ifEquals user.role "user"}}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
-                            <i class="fas fa-user"></i>{{username}}
+                            <i class="fas fa-user"></i>{{user.username}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile" id="dropdowntext">User Profile</a>
-                            <a class="dropdown-item" href="manage-post" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="user/user-profile" id="dropdowntext">User Profile</a>
+                            <a class="dropdown-item" href="/review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="signout" id="dropdowntext">Logout</a>
+                            <a class="dropdown-item" href="/signout" id="dropdowntext">Logout</a>
                         </div>
                     </div>
                 {{else}}
@@ -70,12 +69,12 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownbg">
                             <i class="fas fa-user"></i>Account
                         </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/login" id="dropdowntext">Login</a>
-                            <a class="dropdown-item" href="/register" id="dropdowntext">Register</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="user/login" id="dropdowntext">Login</a>
+                            <a class="dropdown-item" href="user/register" id="dropdowntext">Register</a>
                         </div>
                     </div>
-                {{/if}}
+                {{/ifEquals}} {{/ifEquals}}
         </nav>
 
         <div class="content" id="marginclass">
@@ -84,24 +83,30 @@
                     <div class="col-md-5" id="col-md-Feartured">
                         <h1 class="featuredText">Manage Users</h1>
                     </div>
-
                 </div>
+                {{#each users}}
+                <div data-id="{{_id}}">
                 <div class="row pt-3 mng-post-row">
                     <div class="col-md-12 border-bottom">
                         <div class="row">
-                            <div class="col-md-10">
-                                <p class="postTitle">Jeric Barraza</p>
+                            <div class="col-md-9">
+                                <span class="postTitle">{{name}}</span> <br>
+                                <span>{{username}}</span> <br>
+                                <span>{{email}}</span>
+                                <p id="role">Role: {{role}}</p>
                             </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#editPost">edit</button>
-                                <button type="button" class="btn btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePost">Delete</button>
+                            <div class="col-md-3">
+                                {{!-- <button type="button" id="deleteButton" data-id={{_id}} class="btn btn btn-outline-danger btn-sm float-right ml-2" data-toggle="modal" data-target="#deleteUser">Delete User</button> --}}
+                                <button type="button" id="deleteButton" data-id={{_id}} class="btn btn btn-outline-danger btn-sm float-right ml-2">Delete User</button>
+                                <button type="button" id="editButton" data-id={{_id}} class="btn btn-outline-dark btn-sm float-right" data-toggle="modal" data-target="#editRole">Change Role</button>
                             </div> 
                         </div>
-                        <p class="postPreview">Administrator
-                        </p>
+                        
                     </div>
                 </div>
-                <div class="row pt-3 mng-post-row">
+                </div>
+                {{/each}}
+                {{!-- <div class="row pt-3 mng-post-row">
                     <div class="col-md-12 border-bottom">
                         <div class="row">
                             <div class="col-md-10">
@@ -145,11 +150,11 @@
                         <p class="postPreview">Contributor
                         </p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         {{!-- EDIT MODAL --}}
-        <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -159,22 +164,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Position</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
+                    <form method="Post" action="edit-role">                        
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="edit_id">
+                            <label for="recipient-name" class="col-form-label">Role</label>
+                            <select class="form-control"  name="role" id="role">
+                                <option value="admin">admin</option>
+                                <option value="user">user</option>
+                            </select> 
+                        </div>
+                        <div class="modal-footer"> 
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Edit</button>
                 </div>
                 </div>
             </div>
         </div>
         {{!-- DELETE MODAL --}}
-        <div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -193,7 +201,8 @@
                 </div>
             </div>
         </div>
-        <div class="mt-5 pt-4 pb-3 footer">
+    </div>
+        <div class="mt-5 pt-4 pb-3 footer stickyFooter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-xs-12 about-company">
@@ -226,7 +235,33 @@
         </div>
     </body>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+                $("button#editButton").click(function(){
+                    let id=$(this).attr("data-id")
+                    $("input#edit_id").val(id)
+            })
+        })
+        $(document).ready(function(){
+                $("button#deleteButton").click(function(){
+                    let id=$(this).attr("data-id")
+                    $.ajax({
+                        url: "delete-user",
+                        method: "post",
+                        data: {
+                            id: id
+                        },
+                        success : function(c){
+                            console.log("Delete was: " + c)
+                            if(c){
+                                $("div[data-id="+id+"]").remove()
+                            }
+                        }
+                    })
+            })
+        })
+    </script>
 </html>
