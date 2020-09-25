@@ -30,5 +30,8 @@
     "mongoose": "^5.10.7",
     "owl.carousel": "^2.3.4",
     "path": "^0.12.7"
+  },
+  "engines": {
+    "node": "12.18.3"
   }
 }
