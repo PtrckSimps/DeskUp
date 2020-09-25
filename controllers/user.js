@@ -159,7 +159,7 @@ router.get("/manage-users", function(req, res){
     }
     
     User.manageUser(req.session.username).then((users)=>{
-        res.render('manageUsers.hbs', {
+        res.render('manageusers.hbs', {
             user, users
         })
     })
