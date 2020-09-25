@@ -61,14 +61,12 @@ router.get('/', (req,res) =>{
         role : req.session.role
     }
     if(req.session.username){
-        // if (req.session.username == "admin"){
-        //     req.session.admin = "admin"
         Review.all().then((doc)=>{
             Category.all().then((categories)=>{
-            res.render('index.hbs', {
-                user, review : doc, categories: categories
+                res.render('index.hbs', {
+                    user, review : doc, categories: categories
+                })
             })
-        })
         })
     //not logged in
     }else{
