@@ -163,17 +163,4 @@ router.post("/add-review", urlencoder, function(req, res){
     res.redirect('manage-reviews')
 })
 
-
-router.patch("/edit", urlencoder, function(req, res){
-    //edit post content
-    //to implement - edit content  db
-    
-})
-
-router.delete("/delete", urlencoder, function(req, res){
-    //delete a post
-    //to implement - delete content  db
-    
-})
-
 module.exports = router
