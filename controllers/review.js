@@ -39,7 +39,7 @@ router.post("/ReviewPost", urlencoder, function(req, res){
 
     Review.review(id).then((doc)=>{
         console.log(doc)
-        res.render('reviewPost.hbs', {
+        res.render('reviewpost.hbs', {
             user, review: doc
         })
     })
@@ -57,7 +57,7 @@ router.post("/ReviewPostC", urlencoder, function(req, res){
 
     Review.reviewC(title).then((doc)=>{
         console.log(doc)
-        res.render('reviewPost.hbs', {
+        res.render('reviewpost.hbs', {
             user, review: doc
         })
     })
@@ -114,7 +114,7 @@ router.post("/comment", urlencoder, function(req, res){
 
     //to implement - adding to 
     
-    res.render('reviewPost.hbs', {
+    res.render('reviewpost.hbs', {
         user 
     })
 })
