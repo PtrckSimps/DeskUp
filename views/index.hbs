@@ -87,6 +87,7 @@
         </nav>
 
         <main class = "main-container">
+          
             <section class="main-highlight">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -95,10 +96,10 @@
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
-                        {{#each_c review 1}}
+                        {{#each_rev review 1}}
                         <div class="carousel-item active">
                 
-                        <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" ></a>  
+                         <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" ></a>  
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5><a href="#">{{title}}</a></h5>
                                     <h6>by {{author}}</h6>
@@ -106,10 +107,10 @@
                                     </p>
                                 </div>
                         </div>
-                        {{/each_c}}
-                        {{#each_c review 2}}
+                        {{/each_rev}}
+                        {{#each_rev review 2}}
                         <div class="carousel-item">
-                            <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" ></a>
+                           <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" ></a>
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5><a href="#">{{title}}</a></h5>
                                     <h6>by {{author}}</h6>
@@ -117,9 +118,9 @@
                                     </p>
                                 </div>
                         </div>
-                        {{/each_c}}
+                        {{/each_rev}}
                         {{!-- <div class="carousel-item">
-                        <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" alt="Third slide"> </a>
+                       <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" alt="Third slide"> </a>
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5><a href="#">{{title}}</a></h5>
                                     <h6>by {{author}}</h6>
@@ -144,7 +145,7 @@
                         <div class="col-md-7">
                             <span class="title">Latest Posts</span>
                             <div class="line"></div>
-                            {{#each_c review 3}}
+                             {{#each_rev review 3}}
                             <div class="row">
                                 <div class="col-md-4 first" style="background-image: url({{primaryImage}}); background-size:cover;">
     
@@ -155,9 +156,10 @@
                                     <p class="articlePreview">{{content}}</p>
                                 </div>
                             </div>
-                            {{/each_c}}
+                              {{/each_rev}}
                         </div>
 
+                  
 
                             {{!-- <div class="row">
                                 <div class="col-md-4 second" style="background-image: url(images/wfm2.jpg); background-size: cover;">

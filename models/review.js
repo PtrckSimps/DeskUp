@@ -117,3 +117,23 @@ exports.myRev = function(name){
   })
 }
 
+exports.insertComment = function(id, comment){
+  return new Promise(function(resolve, reject){
+      Review.findOneAndUpdate({_id: id}, { $push: {comments: comment}}).then((user)=>{
+          resolve(user)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.deletePost = function(id){
+  return new Promise(function(resolve, reject){
+      Review.deleteOne({_id: id}).then((post)=>{
+          resolve(post)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+

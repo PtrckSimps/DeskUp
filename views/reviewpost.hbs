@@ -152,11 +152,6 @@
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                         </ul> --}}
-                        {{!-- <ul class="prosList">
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                        </ul> --}}
                             
                     </div>
                     <div class="col-6 m-auto border-bottom">
@@ -169,11 +164,6 @@
                             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
                         </ul> --}}
                         
-                        {{!-- <ul class="prosList">
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum ac magna sodales tincidunt eget eu libero.</li>
-                        </ul> --}}
                     </div>
                 </div>
                 <div class="row">
@@ -185,33 +175,80 @@
                 </div>
             {{/with}}
         </div>
-                {{#ifEquals user.role "admin"}} 
-                    <div class="container mb-5">
+                <div class="container mb-5">
+                    {{#if user.username}} 
                         <p class="comments">Comments</p>
-                        <form action="comment" method="POST">
+                        <form action="../comment" method="POST">
+                            {{#with review}}
+                                    <input type="hidden" value="{{_id}}" name="postID" id="postID">
+                                    <input type="hidden" value="{{title}}" name="postTitle" id="postTitle">
+                            {{/with}}
                             <div class="d-flex flex-row">
                                 {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
                                 <input class="commentNow" type="tex" id="comment" name="comment" placeholder="Write a comment..."></input>
                             </div> 
                             <div class="row d-flex justify-content-end">
-                                <button type="submit" class="commentLoginbutton">Comment</button>
-                                {{!-- <a href="/login" style="color: white; text-decoration: none">Comment</a> --}}
+                                <button type="submit" class="commentLoginbutton">Comments</button>
                             </div>
-                        </form>
-                        <div class="d-flex flex-row comment-row m-t-0">
-                            {{!-- <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div> --}}
+                        </form>                                          
+                    {{else}}
+                        <p class="comments">Comments</p>
+                        <div class="d-flex flex-row">
+                            {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
+                            <div class="commentNow">Login or Sign Up to leave a comment</div>
+                        </div> 
+                        <div class="row d-flex justify-content-end">
+                            <div class="commentLoginbutton"><a href="/user/login" style="color: white; text-decoration: none">Login</a></div>
+                            <div class="commentLoginbutton"><a href="/user/register" style="color: white; text-decoration: none">Sign Up</a></div>
+                        </div>
+
+                    {{/if}} 
+                    {{#ifEquals user.role "admin"}}
+                        {{#each review.comments}}
+                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
                             <div class="comment-text w-100">
-                                <h6 class="font-medium">James Thomas</h6> <span class="text-muted float-right">August 14, 2020</span>  <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
-                                <div class="comment-footer float-right">                          
-                                    <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
-                                    <div class="divider"></div>
-                                    <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
+                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
+                                <div class="comment-footer float-right">
+                                        {{!-- Admin can delete --}}
+                                        <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
                                 </div>           
                             </div>
-
                         </div> 
+                        {{/each}}
+                    {{else}} {{#ifEquals user.role "user"}}
+                        {{#each review.comments}}
+                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
+                                <div class="comment-footer float-right">
+                                        {{#if user}}
+                                            {{username}}
+                                        {{/if}}
+                                        
+                                        <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                        <div class="divider"></div>
+                                        <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
+                                </div>           
+                            </div>
+                        </div> 
+                        {{/each}}
+                    {{else}}
+                        {{#each review.comments}}
+                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
+                                <div class="comment-footer float-right">
+                                </div>           
+                            </div>
+                        </div> 
+                        {{/each}}
+                    {{/ifEquals}} {{/ifEquals}}
+                    {{!-- {{/with}} --}}
+                </div>
+                
+                        
 
-                        <div class="d-flex flex-row comment-row">
+                        {{!-- <div class="d-flex flex-row comment-row">
                             <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg" alt="user" width="50" class="rounded-circle"></div>
                             <div class="comment-text active w-100">
                                 <h6 class="font-medium">Michael Hussey</h6> <span class="text-muted float-right">August31, 2020</span> <span class="m-b-15 d-block">I have the same product and its great!. </span>
@@ -235,88 +272,7 @@
                             </div>
                         </div>
                     </div>
-                    {{else}} {{#ifEquals user.role "user"}}
-                                        <div class="container mb-5">
-                        <p class="comments">Comments</p>
-                        <form action="comment" method="POST">
-                            <div class="d-flex flex-row">
-                                {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
-                                <input class="commentNow" type="tex" id="comment" name="comment" placeholder="Write a comment..."></input>
-                            </div> 
-                            <div class="row d-flex justify-content-end">
-                                <button type="submit" class="commentLoginbutton">Comment</button>
-                                {{!-- <a href="/login" style="color: white; text-decoration: none">Comment</a> --}}
-                            </div>
-                        </form>
-                        <div class="d-flex flex-row comment-row m-t-0">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
-                            <div class="comment-text w-100">
-                                <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
-                                <div class="comment-footer"> 
-                                    <span class="text-muted float-right">August 14, 2020</span> 
-                                </div>            
-                            </div>
-
-                        </div> 
-
-                        <div class="d-flex flex-row comment-row">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg" alt="user" width="50" class="rounded-circle"></div>
-                            <div class="comment-text active w-100">
-                                <h6 class="font-medium">Michael Hussey</h6> <span class="m-b-15 d-block">I have the same product and its great!. </span>
-                                <div class="comment-footer"> 
-                                    <span class="text-muted float-right">August31, 2020</span> 
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="d-flex flex-row comment-row">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="user" width="50" class="rounded-circle"></div>
-                                <div class="comment-text w-100">
-                                <h6 class="font-medium">Johnathan Doeting</h6> <span class="m-b-15 d-block">Thanks for the wonderful review. </span>
-                                <div class="comment-footer"> 
-                                    <span class="text-muted float-right">September 3, 2020</span> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{else}}
-                    <div class="container mb-5">
-                        <p class="comments">Comments</p>
-                        <div class="d-flex flex-row">
-                            {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
-                            <div class="commentNow">Login or Sign Up to leave a comment</div>
-                        </div> 
-                        <div class="row d-flex justify-content-end">
-                            <div class="commentLoginbutton"><a href="/user/login" style="color: white; text-decoration: none">Login</a></div>
-                            <div class="commentLoginbutton"><a href="/user/register" style="color: white; text-decoration: none">Sign Up</a></div>
-                        </div>
-
-                        <div class="d-flex flex-row comment-row m-t-0">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
-                            <div class="comment-text w-100">
-                                <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>   
-                                <div class="comment-footer"> <span class="text-muted float-right">August 14, 2012</span> </div>   
-                            </div>
-
-                        </div> 
-
-                        <div class="d-flex flex-row comment-row">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583319/AAA/3.jpg" alt="user" width="50" class="rounded-circle"></div>
-                            <div class="comment-text active w-100">
-                                <h6 class="font-medium">Michael Hussey</h6> <span class="m-b-15 d-block">I have the same product and I have the same thoughts! </span>
-                                <div class="comment-footer"> <span class="text-muted float-right">August 31, 2020</span> </div>
-                            </div>
-                        </div>
-        
-                        <div class="d-flex flex-row comment-row" id="forhover">
-                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="user" width="50" class="rounded-circle"></div>
-                                <div class="comment-text w-100">
-                                <h6 class="font-medium">Johnathan Doeting</h6> <span class="m-b-15 d-block">Great review!. </span>
-                                <div class="comment-footer"> <span class="text-muted float-right">September 3, 2020</span> </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/ifEquals}} {{/ifEquals}}
+                    --}}
             
         </div>
         {{!-- EDIT MODAL --}}

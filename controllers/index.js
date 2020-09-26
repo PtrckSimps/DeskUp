@@ -27,14 +27,27 @@ hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-let c=0;
-hbs.registerHelper('each_c', function(ary, max, options) {
+
+// hbs.registerHelper('each_start', function(ary, max, options) {
+//     if(!ary || ary.length == 0)
+//         return options.inverse(this);
+
+//     var result = [ ];
+//     for(var i = 0; i < max && i < ary.length; ++i){
+//         result.push(options.fn(ary[i]));
+        
+//     }
+//     return result.join('');
+// });
+var c;
+hbs.registerHelper('each_rev', function(ary, max, options) {
     if(!ary || ary.length == 0)
         return options.inverse(this);
 
     var result = [ ];
     for(var i = c; i < max+c && i < ary.length; ++i){
         result.push(options.fn(ary[i]));
+
     }
     c=i;
     return result.join('');
@@ -48,28 +61,37 @@ hbs.registerHelper('each_cat', function(ary, max, options) {
     var result = [ ];
     for(var i = 0; i < max && i < ary.length; ++i){
         result.push(options.fn(ary[i]));
+
     }
     
     return result.join('');
 });
 
+
+
+
 router.get('/', (req,res) =>{
     //access the homepage
     //logged in
+    c=0;
     let user = {
         username: req.session.username,
         role : req.session.role
     }
     if(req.session.username){
+        // if (req.session.username == "admin"){
+        //     req.session.admin = "admin"
+        
         Review.all().then((doc)=>{
             Category.all().then((categories)=>{
                 res.render('index.hbs', {
-                    user, review : doc, categories: categories
+                    user, review : doc, categories: categories                
                 })
             })
         })
     //not logged in
     }else{
+        
         Review.all().then((doc)=>{
             Category.all().then((categories)=>{
                 res.render('index.hbs', {

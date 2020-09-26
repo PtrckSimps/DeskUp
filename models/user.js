@@ -160,6 +160,17 @@ exports.insert = function(username, review){
     })
 }
 
+exports.insertComment = function(username, comment){
+    return new Promise(function(resolve, reject){
+        User.findOneAndUpdate({username: username}, { $push: {comments: comment}}).then((user)=>{
+            console.log(JSON.stringify(user))
+            resolve(user)
+        }, (err)=>{
+            reject(err)
+        })
+    })
+}
+
 
 exports.update = function(id, name, username, email, password){
     return new Promise(function(resolve, reject){
@@ -195,11 +206,33 @@ exports.editRole = function(id, role){
 exports.deleteUser = function(id){
     return new Promise(function(resolve, reject){
         User.deleteOne({_id: id}).then((user)=>{
-            resolve(user)
+            resolve(user)   
         }, (err)=>{
             reject(err)
         })
     })
+}
+
+// exports.getID = function(title){
+//     return new Promise(function(resolve, reject){
+//         User.find({reviews: {$elemMatch: {title: title}}}).then((user)=>{
+//             resolve(user)
+//         }, (err)=>{
+//             reject(err)
+//         })
+//     })
+// }
+
+exports.deletePost = function(author, title){
+    return new Promise(function(resolve, reject){
+        User.findOneAndUpdate({name: author}, { $pull: { reviews: {title: title}}}).then((user)=>{
+            console.log(user)
+            resolve(user)   
+        }, (err)=>{
+            reject(err)
+        })
+    })
+    
 }
 
 

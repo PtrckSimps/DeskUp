@@ -20,7 +20,6 @@ router.get("/", function(req, res){
         username: req.session.username,
         role : req.session.role
     }
-    console.log("got herem")
     Review.all().then((docs)=>{
         res.render('reviews.hbs', {
             user, review : docs
@@ -39,9 +38,8 @@ router.post("/ReviewPost/:title", urlencoder, function(req, res){
     console.log(title)
 
     Review.review(title).then((doc)=>{
-        console.log(doc)
         res.render('reviewpost.hbs', {
-            user, review: doc
+            user, review: doc, user
         })
     })
 })
@@ -54,8 +52,6 @@ router.post("/ReviewPostC", urlencoder, function(req, res){
     }
 
     let title = req.body.revtitle
-    console.log(title)
-
     Review.reviewC(title).then((doc)=>{
         console.log(doc)
         res.render('reviewpost.hbs', {
@@ -105,20 +101,6 @@ router.get("/manage-reviews", function(req, res){
     
 })
 
-router.post("/comment", urlencoder, function(req, res){
-    let user = {
-        username: req.session.username,
-        role : req.session.role
-    }
-    var comment = req.body.comment
-
-    //to implement - adding to 
-    
-    res.render('reviewpost.hbs', {
-        user 
-    })
-})
-
 router.post("/add-review", urlencoder, function(req, res){
 
     let user = { 
@@ -162,6 +144,72 @@ router.post("/add-review", urlencoder, function(req, res){
     })
     
     res.redirect('manage-reviews')
+})
+
+router.post("/delete-post", urlencoder, function(req, res){
+
+    let id = req.body.id
+    let title = req.body.title
+    let author = req.body.author
+    let category = req.body.category
+
+
+    
+
+    console.log(author)
+    console.log(title)
+    console.log(category)
+
+    User.deletePost(author, title).then((doc)=>{
+        console.log("removed in users")
+    })
+
+    Category.deletePost(category, title).then((doc)=>{
+        console.log("removed in category")
+    })
+
+    Review.deletePost(id).then((doc)=>{
+        if(doc.n) {
+            res.send(true)
+        }else{
+            res.send(false)
+        }
+    })
+})
+
+router.post("/comment", urlencoder, function(req, res){
+
+    console.log("COMMENTS ")
+    let momentdate = moment().format('LLL');
+    console.log(momentdate)
+    let commentObj = {
+        comment: req.body.comment,
+        username: req.session.username,
+        date: momentdate 
+    }
+
+    let user = {
+        username: req.session.username,
+        role : req.session.role
+    }
+
+    var id = req.body.postID
+    var title = req.body.postTitle
+
+
+    Review.insertComment(id, commentObj).then((doc)=>{
+        console.log("Comment inserted in reviews")
+    })
+
+    User.insertComment(req.session.username, commentObj).then((doc)=>{
+        console.log("Comment inserted in users")
+    })
+    
+    Review.review(title).then((doc)=>{
+        res.render('reviewpost.hbs', {
+            user, review: doc ,user
+        })
+    })
 })
 
 module.exports = router

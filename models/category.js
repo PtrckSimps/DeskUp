@@ -79,3 +79,15 @@ exports.insert = function(name, review){
       })
   })
 }
+
+exports.deletePost = function(category, title){
+  return new Promise(function(resolve, reject){
+      Category.findOneAndUpdate({name: category}, { $pull: { reviews: {title: title}}}).then((user)=>{
+          console.log(user)
+          resolve(user)   
+      }, (err)=>{
+          reject(err)
+      })
+  })
+  
+}
