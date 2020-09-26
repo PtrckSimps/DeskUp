@@ -87,7 +87,6 @@
         </nav>
 
         <main class = "main-container">
-          
             <section class="main-highlight">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -98,21 +97,20 @@
                     <div class="carousel-inner">
                         {{#each_rev review 1}}
                         <div class="carousel-item active">
-                
-                         <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" ></a>  
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5><a href="#">{{title}}</a></h5>
-                                    <h6>by {{author}}</h6>
-                                    <p class="articlePreview">{{content}}
-                                    </p>
-                                </div>
+                            <a id="readmore" title= "{{title}}"> <img class="d-block w-100" src="{{primaryImage}}" ></a>  
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5><a>{{title}}</a></h5>
+                                <h6>by {{author}}</h6>
+                                <p class="articlePreview">{{content}}
+                                </p>
+                            </div>
                         </div>
                         {{/each_rev}}
                         {{#each_rev review 2}}
                         <div class="carousel-item">
-                           <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" ></a>
+                            <a <a id="readmore" title= "{{title}}"><img class="d-block w-100" src="{{primaryImage}}" ></a>
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5><a href="#">{{title}}</a></h5>
+                                    <h5><a>{{title}}</a></h5>
                                     <h6>by {{author}}</h6>
                                     <p class="articlePreview">{{content}}
                                     </p>
@@ -120,7 +118,7 @@
                         </div>
                         {{/each_rev}}
                         {{!-- <div class="carousel-item">
-                       <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" alt="Third slide"> </a>
+                    <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" alt="Third slide"> </a>
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5><a href="#">{{title}}</a></h5>
                                     <h6>by {{author}}</h6>
@@ -145,21 +143,19 @@
                         <div class="col-md-7">
                             <span class="title">Latest Posts</span>
                             <div class="line"></div>
-                             {{#each_rev review 3}}
+                            {{#each_rev review 3}}
                             <div class="row">
                                 <div class="col-md-4 first" style="background-image: url({{primaryImage}}); background-size:cover;">
-    
                                 </div>
                                 <div class="col-md-8 first">
-                                    <h3><a href="/review/ReviewPost">{{title}}</a></h3>
+                                    <h3><a title = "{{title}}" id="readmore">{{title}}</a></h3>
                                     <span>by {{author}}</span>
                                     <p class="articlePreview">{{content}}</p>
                                 </div>
                             </div>
-                              {{/each_rev}}
+                            {{/each_rev}}
                         </div>
 
-                  
 
                             {{!-- <div class="row">
                                 <div class="col-md-4 second" style="background-image: url(images/wfm2.jpg); background-size: cover;">
@@ -194,13 +190,15 @@
                             <span class="title">Categories</span>
                             <div class="line"></div>
                             {{#each_cat categories 3}}
+                            <div data-id="{{_id}}">
                             <div class="row">
-                                <a class="col-md-12 first" style="background-image: url({{picture}});background-size: cover;">
+                                <a class="col-md-12 first" id="readmore" href="/review/Reviewpost/{{title}}" style="background-image: url({{picture}});background-size: cover;">
                                     <div class="text">
                                         <span class="title">{{name}}</span><br>
                                         {{!-- <span>{{contentT}}</span> --}}
                                     </div>   
                                 </a>
+                            </div>
                             </div>
                             {{/each_cat}}
 
@@ -229,7 +227,9 @@
             </section>
 
         </main>
-
+        <form id="rev_form" method="post" action="">
+            <input type="hidden" name="revid" id="revid">
+        </form>
         
         <div class="mt-5 pt-4 pb-3 footer stickyFooter">
             <div class="container">
@@ -267,4 +267,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+                $("a#readmore").click(function(){
+                    let title=$(this).attr("title")
+                    $("input#revid").val(title)
+                    $("form#rev_form").attr("action", "review/ReviewPost/" + title)
+                    $("form#rev_form").submit()
+                })
+        })
+    </script>
+    
 </html>
