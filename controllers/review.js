@@ -214,25 +214,26 @@ router.post("/update", urlencoder,(req,res)=>{
         review.specs.push(req.body.name[i])
     }
     console.log("ID is "+ id)
+    console.log("counter "+ req.body.counter)
     console.log(review.specs)
     
-    // User.deletePost(req.body.author, req.body.oldtitle).then((doc)=>{
-    //     User.updateRev(req.body.author,review2).then((doc) =>{
-    //         console.log("Review added in the user's review")
-    //     })
-    // })
+    User.deletePost(req.body.author, req.body.oldtitle).then((doc)=>{
+        User.updateRev(req.body.author,review2).then((doc) =>{
+            console.log("Review added in the user's review")
+        })
+    })
 
-    // Category.deletePost(category, req.body.oldtitle).then((doc)=>{
-    //     Category.update(req.body.category, review2).then((doc) =>{
-    //         console.log("Review added in the category")
-    //     })
-    // })
+    Category.deletePost(category, req.body.oldtitle).then((doc)=>{
+        Category.update(req.body.category, review2).then((doc) =>{
+            console.log("Review added in the category")
+        })
+    })
 
-    // Review.removespecs(id, review).then((doc) =>{
-    //     Review.update(id, review).then((doc) =>{
-    //         console.log("updated Review successful")
-    //     })
-    // })
+    Review.removespecs(id, review).then((doc) =>{
+        Review.update(id, review).then((doc) =>{
+            console.log("updated Review successful")
+        })
+    })
 
     res.redirect('manage-reviews')
 })

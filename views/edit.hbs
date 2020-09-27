@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <div class="table-responsive">  
                             <label for="message-text" class="col-form-label">Specifications: </label>
-                            <input type="hidden" class="form-control" name="counter" id="specscount" value="counter">
+                            <input type="hidden" class="form-control" name="counter" id="specscount" value={{review.specs.length}}>
                             <table class="table table-bordered" id="dynamic_field">  
                                 {{#each review.specs}}
                                     {{#ifEquals @index "0"}}
@@ -139,7 +139,6 @@
                 $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name['+i+']" placeholder="No Specification yet..." class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
                 i++; 
                 console.log(i);
-                $('#counter').html(i);
                 $('#specscount').val(i)
             });  
 
