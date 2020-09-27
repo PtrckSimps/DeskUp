@@ -302,14 +302,30 @@ router.post("/comment", urlencoder, function(req, res){
     }, (err) =>{
         res.send(false)
     })
+})
 
+router.post("/delete-comment", urlencoder, function(req, res){
+    let id = req.body.id
+    let username = req.body.username
+    let title = req.body.title
+    let comment = req.body.comment
     
-    
-    // Review.review(title).then((doc)=>{
-    //     res.render('reviewpost.hbs', {
-    //         user, review: doc ,user
-    //     })
-    // })
+    console.log(title)
+    console.log(id)
+    console.log(comment)
+
+    User.deleteComment(username, comment).then((doc)=>{
+        console.log("deleted comment in users")
+    })
+
+    Review.deleteComment(title, id).then((doc)=>{
+        console.log(doc)
+        if(doc) {
+            res.send(true)
+        }else{
+            res.send(false)
+        }
+    })
 })
 
 module.exports = router

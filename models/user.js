@@ -244,3 +244,12 @@ exports.updateRev = function(author, review){
     })
 }
 
+exports.deleteComment = function(username, comment){
+    return new Promise(function(resolve, reject){
+        User.findOneAndUpdate({username: username}, { $pull: { comments: {comment: comment}}}).then((user)=>{
+            resolve(user)   
+        }, (err)=>{
+            reject(err)
+        })
+    })
+}

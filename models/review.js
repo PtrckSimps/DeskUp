@@ -203,3 +203,13 @@ exports.search = function(keyword){
   })
 }
 
+exports.deleteComment = function(title, id){
+  return new Promise(function(resolve, reject){
+      Review.findOneAndUpdate({title: title}, { $pull: { comments: {_id: id}}}).then((user)=>{
+          resolve(user)   
+      }, (err)=>{
+          reject(err)
+      })
+  })
+  
+}
