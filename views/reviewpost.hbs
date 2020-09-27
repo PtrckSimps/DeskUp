@@ -175,22 +175,22 @@
                 </div>
             {{/with}}
         </div>
-                <div class="container mb-5">
+                <div class="container mb-5" id="parentContainer">
                     {{#if user.username}} 
                         <p class="comments">Comments</p>
-                        <form action="../comment" method="POST">
+                        {{!-- <form action="../comment" method="POST"> --}}
                             {{#with review}}
                                     <input type="hidden" value="{{_id}}" name="postID" id="postID">
                                     <input type="hidden" value="{{title}}" name="postTitle" id="postTitle">
                             {{/with}}
                             <div class="d-flex flex-row">
                                 {{!-- <div class="p-2"><i class="fas fa-comment-alt fa-3x"></i></div> --}}
-                                <input class="commentNow" type="tex" id="comment" name="comment" placeholder="Write a comment..."></input>
+                                <input class="commentNow"  type="tex" id="comment" name="comment" placeholder="Write a comment..."></input>
                             </div> 
                             <div class="row d-flex justify-content-end">
-                                <button type="submit" class="commentLoginbutton">Comments</button>
-                            </div>
-                        </form>                                          
+                                <button type="submit" name="{{user.username}}" class="commentLoginbutton">Comments</button>
+                            </div>  
+                        {{!-- </form>                                           --}}
                     {{else}}
                         <p class="comments">Comments</p>
                         <div class="d-flex flex-row">
@@ -201,15 +201,14 @@
                             <div class="commentLoginbutton"><a href="/user/login" style="color: white; text-decoration: none">Login</a></div>
                             <div class="commentLoginbutton"><a href="/user/register" style="color: white; text-decoration: none">Sign Up</a></div>
                         </div>
-
                     {{/if}} 
+
                     {{#ifEquals user.role "admin"}}
                         {{#each review.comments}}
                         <div class="d-flex flex-row comment-row m-t-0 border-bottom">
                             <div class="comment-text w-100">
                                 <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
                                 <div class="comment-footer float-right">
-                                        {{!-- Admin can delete --}}
                                         <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
                                 </div>           
                             </div>
@@ -220,28 +219,27 @@
                         <div class="d-flex flex-row comment-row m-t-0 border-bottom">
                             <div class="comment-text w-100">
                                 <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
-                                <div class="comment-footer float-right">
-                                        {{#if user}}
-                                            {{username}}
-                                        {{/if}}
-                                        
+                                <div class="comment-footer float-right">  
+                                    {{#ifEquals ../user.username username}}                             
                                         <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
                                         <div class="divider"></div>
                                         <button type="button" class="btn btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteComment">Delete</button>
+                                    {{/ifEquals}}
                                 </div>           
                             </div>
                         </div> 
                         {{/each}}
                     {{else}}
-                        {{#each review.comments}}
+                        {{!-- {{#each review.comments}}
                         <div class="d-flex flex-row comment-row m-t-0 border-bottom">
                             <div class="comment-text w-100">
                                 <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
                                 <div class="comment-footer float-right">
+
                                 </div>           
                             </div>
                         </div> 
-                        {{/each}}
+                        {{/each}} --}}
                     {{/ifEquals}} {{/ifEquals}}
                     {{!-- {{/with}} --}}
                 </div>
@@ -353,8 +351,62 @@
         </div>
     </body>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("button.commentLoginbutton").click(function(){
+                let name = $(this).attr('name')
+                let comment = $(".commentNow").val()
+                let title = $("#postTitle").val()
+                let id = $("#postID").val()
 
+                $.ajax({
+                    url: "../comment",
+                    method: "post",
+                    data: {
+                        id: id,
+                        name: name,
+                        comment: comment,
+                        title: title
+                    },
+                    success : function(c){
+                        console.log("comment was: " + c)
+                        if(c){
+                            let parent = document.getElementById("parentContainer")
+                            let commentdiv = document.createElement("div")
+                            let commentText = document.createElement("div")
+                            let h5 = document.createElement("h5")
+                            let span1 = document.createElement("span")
+                            let span2 = document.createElement("span")
+                            let commentfooter = document.createElement("div")  
+                            let date = c.date
+                            commentdiv.className = "d-flex flex-row comment-row m-t-0 border-bottom"
+                            commentText.className = "comment-text w-100"
+                            h5.className = "font-medium"
+                            span1.className = "text-muted float-right"
+                            span2.className = "m-b-15 d-block"
+                            commentfooter.className = "comment-footer float-right"
+
+                            h5.innerHTML = name
+                            span1.innerHTML = c
+                            span2.innerHTML = comment
+
+                            commentText.appendChild(h5)
+                            commentText.appendChild(span1)
+                            commentText.appendChild(span2)
+                            commentText.appendChild(commentfooter)
+
+                            commentdiv.appendChild(commentText)
+
+                            parent.append(commentdiv)
+
+                        }
+                    }
+                })
+            })
+        })
+            
+    </script>
 </html>

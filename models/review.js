@@ -99,6 +99,60 @@ exports.review = function(title){
   })
 }
 
+exports.edit = function(id){
+  return new Promise(function(resolve, reject){
+      Review.findOne({_id: id}).then((review)=>{
+        resolve(review)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.removespecs = function(id, review){
+  return new Promise(function(resolve, reject){
+      Review.findOneAndUpdate({_id: id}, {
+        $set: {specs: []}
+      }).then((review)=>{
+        resolve(review)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.update = function(id, review){
+  return new Promise(function(resolve, reject){
+      Review.findOneAndUpdate({_id: id}, {
+        title: review.title,
+        content: review.content,
+        date: review.date,
+        score: review.score,
+        primaryImage:review.primaryImage,
+        secondaryImage: review.secondaryImage,
+        pros: review.pros,
+        cons: review.cons,
+        verdict: review.verdict,
+        category: review.category,
+        $push: {specs: review.specs}
+      }).then((review)=>{
+        resolve(review)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.review = function(title){
+  return new Promise(function(resolve, reject){
+      Review.findOne({title: title}).then((review)=>{
+        resolve(review)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
 exports.reviewC = function(title){
   return new Promise(function(resolve, reject){
       Review.findOne({title: title}).then((review)=>{

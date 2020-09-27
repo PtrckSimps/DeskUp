@@ -351,6 +351,11 @@ color: #afb2b7;
   height:auto;
   display:inline-block;
 }
+.divider2{
+  height:10px;
+  height:auto;
+  display:inline-block;
+}
 
 .comments{
   color: #48b8ac;

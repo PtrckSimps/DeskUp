@@ -163,7 +163,7 @@ exports.insert = function(username, review){
 exports.insertComment = function(username, comment){
     return new Promise(function(resolve, reject){
         User.findOneAndUpdate({username: username}, { $push: {comments: comment}}).then((user)=>{
-            console.log(JSON.stringify(user))
+            // console.log(JSON.stringify(user))
             resolve(user)
         }, (err)=>{
             reject(err)
@@ -226,7 +226,6 @@ exports.deleteUser = function(id){
 exports.deletePost = function(author, title){
     return new Promise(function(resolve, reject){
         User.findOneAndUpdate({name: author}, { $pull: { reviews: {title: title}}}).then((user)=>{
-            console.log(user)
             resolve(user)   
         }, (err)=>{
             reject(err)
@@ -235,5 +234,13 @@ exports.deletePost = function(author, title){
     
 }
 
-
+exports.updateRev = function(author, review){
+    return new Promise(function(resolve, reject){
+        User.findOneAndUpdate({name: author}, { $push: { reviews: review }}).then((user)=>{
+            resolve(user)   
+        }, (err)=>{
+            reject(err)
+        })
+    })
+}
 

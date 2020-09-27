@@ -31,6 +31,7 @@ router.post("/ReviewPost/:title", urlencoder, function(req, res){
     //user want to view review post
     let user = {
         username: req.session.username,
+        name: req.session.name,
         role : req.session.role
     }
 
@@ -48,6 +49,7 @@ router.post("/ReviewPostC", urlencoder, function(req, res){
     //user want to view review post
     let user = {
         username: req.session.username,
+        name: req.session.username,
         role : req.session.role
     }
 
@@ -161,6 +163,80 @@ router.post("/add-review", urlencoder, function(req, res){
     res.redirect('manage-reviews')
 })
 
+router.post("/edit", urlencoder,(req,res)=>{
+    let id =req.body.id
+    let title =req.body.title
+
+    console.log("ID= "+id)
+    console.log("Title= "+ title)
+    
+    Review.edit(id).then((doc)=>{
+        res.render('edit.hbs', {
+            review : doc
+        })  
+    })
+})
+
+router.post("/update", urlencoder,(req,res)=>{
+    let user = { 
+        username: req.session.username,
+        name: req.session.name,
+        role : req.session.role
+    }
+
+    let momentdate = moment().format('MMMM DD YYYY');
+    let id=req.body.id
+    let category = req.body.category
+
+    // console.log("date is "+ test)
+    let review = {
+        title: req.body.title,
+        content: req.body.content,
+        date: momentdate,
+        score: req.body.score,
+        primaryImage: req.body.primaryImage,
+        secondaryImage:  req.body.secondaryImage,
+        specs: [],
+        pros:  req.body.pros,
+        cons:  req.body.cons,
+        verdict:  req.body.verdict,
+    }
+
+    let review2 = {
+        title: req.body.title,
+        content: req.body.content,
+        date: momentdate,
+        score: req.body.score,
+        primaryImage: req.body.primaryImage
+    }
+
+    for(i = 0; i < req.body.counter; i++) {
+        review.specs.push(req.body.name[i])
+    }
+    console.log("ID is "+ id)
+    console.log(review.specs)
+    
+    // User.deletePost(req.body.author, req.body.oldtitle).then((doc)=>{
+    //     User.updateRev(req.body.author,review2).then((doc) =>{
+    //         console.log("Review added in the user's review")
+    //     })
+    // })
+
+    // Category.deletePost(category, req.body.oldtitle).then((doc)=>{
+    //     Category.update(req.body.category, review2).then((doc) =>{
+    //         console.log("Review added in the category")
+    //     })
+    // })
+
+    // Review.removespecs(id, review).then((doc) =>{
+    //     Review.update(id, review).then((doc) =>{
+    //         console.log("updated Review successful")
+    //     })
+    // })
+
+    res.redirect('manage-reviews')
+})
+
 router.post("/delete-post", urlencoder, function(req, res){
 
     let id = req.body.id
@@ -168,8 +244,6 @@ router.post("/delete-post", urlencoder, function(req, res){
     let author = req.body.author
     let category = req.body.category
 
-
-    
 
     console.log(author)
     console.log(title)
@@ -196,10 +270,12 @@ router.post("/comment", urlencoder, function(req, res){
 
     console.log("COMMENTS ")
     let momentdate = moment().format('LLL');
+
     console.log(momentdate)
+
     let commentObj = {
         comment: req.body.comment,
-        username: req.session.username,
+        username: req.body.name,
         date: momentdate 
     }
 
@@ -208,23 +284,32 @@ router.post("/comment", urlencoder, function(req, res){
         role : req.session.role
     }
 
-    var id = req.body.postID
-    var title = req.body.postTitle
+    var id = req.body.id
+    var title = req.body.title
 
-
-    Review.insertComment(id, commentObj).then((doc)=>{
-        console.log("Comment inserted in reviews")
-    })
-
+    
     User.insertComment(req.session.username, commentObj).then((doc)=>{
         console.log("Comment inserted in users")
     })
-    
-    Review.review(title).then((doc)=>{
-        res.render('reviewpost.hbs', {
-            user, review: doc ,user
-        })
+
+    Review.insertComment(id, commentObj).then((doc)=>{
+        console.log(doc)
+        if(doc){
+            res.send(momentdate)
+        }else{
+            res.send(false)
+        }
+    }, (err) =>{
+        res.send(false)
     })
+
+    
+    
+    // Review.review(title).then((doc)=>{
+    //     res.render('reviewpost.hbs', {
+    //         user, review: doc ,user
+    //     })
+    // })
 })
 
 module.exports = router
