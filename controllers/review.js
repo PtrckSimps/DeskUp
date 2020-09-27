@@ -62,15 +62,30 @@ router.post("/ReviewPostC", urlencoder, function(req, res){
 
 // Test Run for views
 
-router.get('/searchResult', urlencoder, (req,res) =>{
+router.post('/searchResult', urlencoder, (req,res) =>{
     //User search something -> search results
     let user = {
         username: req.session.username,
         role : req.session.role
     }
-    res.render('search.hbs', {
-        user
+    let keyword = req.body.search
+    
+    console.log("keyword is " + keyword)
+
+    Review.search(keyword).then((docs)=>{
+        console.log(docs)
+        if(docs){
+            res.render('search.hbs', {
+                user, reviews: docs
+            })
+        } 
+        else{
+            res.render('search.hbs', {
+                user, error: "No match found"
+            })
+        }
     })
+    
 })
 
 router.get("/manage-reviews", function(req, res){
@@ -142,7 +157,7 @@ router.post("/add-review", urlencoder, function(req, res){
     User.insert(req.session.username, review).then((doc) =>{
         console.log("Review added in the user's review")
     })
-    
+
     res.redirect('manage-reviews')
 })
 

@@ -33,6 +33,8 @@ var reviewSchema = mongoose.Schema({
     ]
 })
 
+reviewSchema.index({content: 'text'});
+
 // post: [
 //   {
 //       _id: ObjectID(),
@@ -131,6 +133,16 @@ exports.deletePost = function(id){
   return new Promise(function(resolve, reject){
       Review.deleteOne({_id: id}).then((post)=>{
           resolve(post)
+      }, (err)=>{
+          reject(err)
+      })
+  })
+}
+
+exports.search = function(keyword){
+  return new Promise(function(resolve, reject){
+      Review.find({ $text: { $search: keyword } }).then((reviews)=>{
+          resolve(reviews)
       }, (err)=>{
           reject(err)
       })

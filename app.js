@@ -20,6 +20,7 @@ mongoose.connect("mongodb+srv://DeskUp-User:DeskUp-User1224@cluster0.o3pdp.mongo
     useUnifiedTopology: true
 })
 mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true)
 
 app.set("view engine", "hbs")
 app.use(express.static(__dirname + "/public"))
