@@ -304,6 +304,45 @@ router.post("/comment", urlencoder, function(req, res){
     })
 })
 
+router.post("/edit-comment", urlencoder, function(req, res){
+    let id = req.body.id
+    let username = req.body.username
+    let title = req.body.title
+    let oldcomment = req.body.comment
+    let newComment = req.body.newComment
+    let momentdate = moment().format('LLL');
+
+    let comment = {
+        comment: newComment,
+        username: username,
+        date: momentdate
+    }
+
+    console.log(title)
+    console.log(id)
+    console.log(oldcomment)
+    console.log(newComment)
+    console.log(comment)
+
+    User.deleteComment(username, oldcomment).then((doc)=>{
+        User.updateComment(username, comment).then((doc)=>{
+            console.log("deleted comment in users")
+        })
+    })
+
+    Review.deleteComment(title, id).then((doc)=>{
+        Review.updateComment(title, comment).then((doc)=>{
+            console.log("deleted comment in Review")
+            if(doc) {
+                res.send(true)
+            }else{
+                res.send(false)
+            }
+        })
+    })
+    
+})
+
 router.post("/delete-comment", urlencoder, function(req, res){
     let id = req.body.id
     let username = req.body.username

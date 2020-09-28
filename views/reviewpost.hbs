@@ -194,49 +194,48 @@
                     {{#ifEquals user.role "admin"}}
                         {{#each review.comments}}
                         <div data-id={{_id}}>
-                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
-                            <div class="comment-text w-100">
-                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
-                                <div class="comment-footer float-right">
+                            <div class="d-flex flex-row comment-row m-t-0 border-bottom">
+                                <div class="comment-text w-100">
+                                    <span class="commentusername">{{username}}</span> 
+                                    <p class="text-muted float-right">{{date}}</p>  
+                                    <span class="m-b-15 d-block commmentfield">{{comment}}</span>
                                     {{#ifEquals ../user.username username}}                             
-                                        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
-                                        <div class="divider"></div>
                                         <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton">Delete</button>
+                                        <button type="button" id="editButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn-outline-dark btn-sm float-right ml-2"> Edit</button> 
                                     {{else}}
                                         <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton">Delete</button>
-                                    {{/ifEquals}}                                                       
-                                </div>           
-                            </div>
-                        </div> 
+                                    {{/ifEquals}}                                        
+                                </div>
+                            </div> 
                         </div>
                         {{/each}}
                     {{else}} {{#ifEquals user.role "user"}}
                         {{#each review.comments}}
                         <div data-id={{_id}}>
-                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
-                            <div class="comment-text w-100">
-                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
-                                <div class="comment-footer float-right">  
+                            <div class="d-flex flex-row comment-row m-t-0 border-bottom">
+                                <div class="comment-text w-100">
+                                    <h5 class="font-medium">{{username}}</h5> 
+                                    <span class="text-muted float-right">{{date}}</span>  
+                                    <span class="m-b-15 d-block commmentfield">{{comment}}</span>                                 
                                     {{#ifEquals ../user.username username}}                             
-                                        <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
-                                        <div class="divider"></div>
                                         <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton">Delete</button>
+                                        <button type="button" id="editButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn-outline-dark btn-sm float-right ml-2"> Edit</button> 
                                     {{/ifEquals}}
-                                </div>           
+                                </div> 
                             </div>
-                        </div> 
                         </div>
                         {{/each}}
                     {{else}}
                         {{#each review.comments}}
                         <div data-id={{_id}}>
-                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
-                            <div class="comment-text w-100">
-                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
-                                <div class="comment-footer float-right">  
-                                </div>           
+                            <div class="d-flex flex-row comment-row m-t-0 border-bottom">
+                                <div class="comment-text w-100">
+                                    <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  
+                                    <span class="m-b-15 d-block">{{comment}}</span>
+                                    <div class="comment-footer float-right">  
+                                    </div>           
+                                </div>
                             </div>
-                        </div>
                         </div> 
                         {{/each}}
                     {{/ifEquals}} {{/ifEquals}}
@@ -303,8 +302,8 @@
                             let divID = document.createElement("div")
                             let commentdiv = document.createElement("div")
                             let commentText = document.createElement("div")
-                            let h5 = document.createElement("h5")
-                            let span1 = document.createElement("span")
+                            let h5 = document.createElement("span")
+                            let span1 = document.createElement("p")
                             let span2 = document.createElement("span")
                             let commentfooter = document.createElement("div")  
                             let date = c.date
@@ -320,24 +319,27 @@
                             
                             deleteButton.setAttribute('type','button')
                             $(deleteButton).attr("id", "deleteButton")
-                            /* deleteButton.setAttribute('id','deleteButton')*/
                             deleteButton.setAttribute('title-id', title)
                             deleteButton.setAttribute('username',name)
                             deleteButton.setAttribute('data-id',id)
                             deleteButton.setAttribute('comment',comment)
                             deleteButton.className = "btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton";
 
-                            editButton.className = "btn btn-outline-dark btn-sm"
+                            editButton.className = "btn btn-outline-dark btn-sm float-right ml-2"
                             editButton.setAttribute("type", "button")
-                            editButton.setAttribute("data-toggle", "modal")
-                            editButton.setAttribute("data-target", "#editComment")
+                            $(editButton).attr("id", "editButton")
+                            editButton.setAttribute('title-id', title)
+                            editButton.setAttribute('username',name)
+                            editButton.setAttribute('data-id',id)
+                            editButton.setAttribute('comment',comment)
+                            
 
 
                             commentdiv.className = "d-flex flex-row comment-row m-t-0 border-bottom"
                             commentText.className = "comment-text w-100"
-                            h5.className = "font-medium"
+                            h5.className = "commentusername"
                             span1.className = "text-muted float-right"
-                            span2.className = "m-b-15 d-block"
+                            span2.className = "m-b-15 d-block commmentfield"
                             commentfooter.className = "comment-footer float-right"
 
                             h5.innerHTML = name
@@ -346,13 +348,13 @@
                             editButton.innerHTML = "Edit"
                             deleteButton.innerHTML = "Delete"
                             
-                            commentfooter.appendChild(editButton)
-                            commentfooter.appendChild(deleteButton)
+                            
 
                             commentText.appendChild(h5)
                             commentText.appendChild(span1)
                             commentText.appendChild(span2)
-                            commentText.appendChild(commentfooter)
+                            commentText.appendChild(deleteButton)
+                            commentText.appendChild(editButton)
 
                             commentdiv.appendChild(commentText)
 
@@ -418,5 +420,68 @@
                 })
             })
         })
+
+        $(document).ready(function(){
+            $(document).on('click', '#editButton', function() {
+                let id=$(this).attr("data-id")
+                let username=$(this).attr("username")
+                let title=$(this).attr("title-id")
+                let comment=$(this).attr("comment")
+                var parent = $(this).parent()
+
+                let saveButton = document.createElement("button")
+                saveButton.setAttribute('type','button')
+                saveButton.setAttribute('id','saveButton')
+                saveButton.setAttribute('title-id', title)
+                saveButton.setAttribute('username', username)
+                saveButton.setAttribute('data-id',id)
+                saveButton.setAttribute('comment',comment)
+                saveButton.className = "btn btn btn-outline-success btn-sm float-right ml-2";
+                saveButton.innerHTML = "Save"
+
+                let newComment = $(parent).children('.commmentfield');
+
+                $(newComment).attr('contenteditable', 'true') 
+                $(newComment).addClass('editableBG')
+                
+                parent.append(saveButton)
+            })
+        })
+
+        $(document).ready(function(){
+            $(document).on('click', '#saveButton', function() {
+                let id= $(this).attr("data-id")
+                let username=$(this).attr("username")
+                let title=$(this).attr("title-id")
+                let comment=$(this).attr("comment")
+                var parent = $(this).parent()
+
+                let commentfield = $(parent).children('.commmentfield');
+                let newComment = commentfield.text()
+                console.log(newComment)
+                
+                $.ajax({
+                    url: "../edit-comment",
+                    method: "post",
+                    data: {
+                        id: id,
+                        username: username,
+                        title: title,
+                        comment: comment,
+                        newComment: newComment
+                    },
+                    success : function(c){
+                        console.log("edit was: " + c)
+                        if(c){
+                            $(commentfield).attr('contenteditable', 'false') 
+                            $(commentfield).removeClass('editableBG')
+                            $("#saveButton").remove()
+                        }
+                    }
+                })
+                
+            })
+        })
+
     </script>
 </html>

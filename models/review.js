@@ -211,5 +211,14 @@ exports.deleteComment = function(title, id){
           reject(err)
       })
   })
-  
+}
+
+exports.updateComment = function(title, comment){
+  return new Promise(function(resolve, reject){
+      Review.findOneAndUpdate({title: title}, { $push: { comments: comment }}).then((user)=>{
+          resolve(user)   
+      }, (err)=>{
+          reject(err)
+      })
+  })
 }

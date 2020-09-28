@@ -357,6 +357,16 @@ color: #afb2b7;
   display:inline-block;
 }
 
+.editableBG{
+  padding-left: 5px;
+  border: 1px solid  rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.commentusername{
+  font-weight: 700;
+  font-size: 18px;
+}
 .comments{
   color: #48b8ac;
   font-weight: 500;

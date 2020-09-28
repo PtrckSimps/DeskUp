@@ -253,3 +253,13 @@ exports.deleteComment = function(username, comment){
         })
     })
 }
+
+exports.updateComment = function(username, comment){
+    return new Promise(function(resolve, reject){
+        User.findOneAndUpdate({username: username}, { $push: { comments: comment }}).then((user)=>{
+            resolve(user)   
+        }, (err)=>{
+            reject(err)
+        })
+    })
+}
