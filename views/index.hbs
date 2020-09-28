@@ -20,7 +20,7 @@
         </script> 
     </head>
     <body>
-    <div class="mainContainer">
+    <div class="mainContainer"> 
     
         <nav class="navbar navbar-expand-md fixed-top animated">
             <a class="navbar-brand logo" href="/">
@@ -117,15 +117,6 @@
                                 </div>
                         </div>
                         {{/each_rev}}
-                        {{!-- <div class="carousel-item">
-                    <a href="#"> <img class="d-block w-100" src="{{primaryImage}}" alt="Third slide"> </a>
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5><a href="#">{{title}}</a></h5>
-                                    <h6>by {{author}}</h6>
-                                    <p>{{content}}
-                                    </p>
-                                </div>
-                        </div> --}}
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -141,7 +132,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-7">
-                            <span class="title">Latest Posts</span>
+                            <span class="title">Latest Reviews</span>
                             <div class="line"></div>
                             {{#each_rev review 3}}
                             <div class="row">
@@ -156,34 +147,6 @@
                             {{/each_rev}}
                         </div>
 
-
-                            {{!-- <div class="row">
-                                <div class="col-md-4 second" style="background-image: url(images/wfm2.jpg); background-size: cover;">
-
-                                </div>
-                                <div class="col-md-8 second">
-                                    <h3><a href="#">LG's stunning 38-inch UltraWide Monitor</a></h3> 
-                                    <span>by Patrick Simpao</span>
-                                    <p>As technology becomes more and more advanced, there's a lot of options for 
-                                        Gaming monitors. From RoG, to DELL, and LG, 144hz are here to stay. Goodbye 60hz monitors.</p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4 second" style="background-image: url(images/keyboardHome.webp); background-size: cover;">
-
-                                </div>
-                                <div class="col-md-8 second">
-                                    <h3><a href="#">RED5 Nova Gaming Keyboard: Is it worth it?</a></h3>
-                                    <span>by Marco Pangilinan</span>
-                                    <p>The new gaming keyboard by RED5 just came out today. With its Cherry MX Red switches and
-                                        RGB backlighting, is it worth it?
-                                    </p>
-                                </div>
-                            </div>
-                            
-                        </div> --}}
-
                         <div class="col-md-1">
                         </div>
                         <div class="col-md-4">
@@ -192,34 +155,18 @@
                             {{#each_cat categories 3}}
                             <div data-id="{{_id}}">
                             <div class="row">
-                                <a class="col-md-12 first" id="readmore" href="/review/Reviewpost/{{title}}" style="background-image: url({{picture}});background-size: cover;">
+                                <a class="col-md-12 first categName" name-id="{{name}}" style="background-image: url({{picture}}); background-size: cover;">
                                     <div class="text">
                                         <span class="title">{{name}}</span><br>
                                         {{!-- <span>{{contentT}}</span> --}}
                                     </div>   
                                 </a>
-                            </div>
+                            </div> 
                             </div>
                             {{/each_cat}}
-
-
-                                {{!-- <div class="row">
-                                    <a class="col-md-12 second" style="background-image: url(/images/bglogreg.jpg);background-size: cover;">
-                                        <div class="text">
-                                            <span class="title">Affordable Monitors You'll Need</span><br>
-                                            <span>Choose among a list of affordable monitors...</span>
-                                        </div>
-                                        
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <a class="col-md-12 third" style="background-image: url(/images/lgmonitor.jpg);background-position:0 160px;background-size: cover;">
-                                        <div class="text">
-                                            <span class="title">Applications for Productivity</span><br>
-                                            <span>Applications to boost your productivity...</span>
-                                        </div>
-                                    </a>
-                                </div> --}}
+                            <form id="categ_form" method="post" action="category/specificCategory">
+                                <input type="hidden" name="nameC" id="nameC">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -264,7 +211,7 @@
         </div>
     </body>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
@@ -276,6 +223,16 @@
                     $("form#rev_form").submit()
                 })
         })
+        
+        $(document).ready(function(){
+                $(".categName").click(function(){
+                    let id=$(this).attr("name-id")
+                    $("input#nameC").val(id)
+                    console.log(id)
+                    console.log($("input#nameC").val())
+                    $("form#categ_form").submit()
+                })
+            })
     </script>
     
 </html>
