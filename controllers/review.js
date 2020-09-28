@@ -75,15 +75,14 @@ router.post('/searchResult', urlencoder, (req,res) =>{
     console.log("keyword is " + keyword)
 
     Review.search(keyword).then((docs)=>{
-        console.log(docs)
-        if(docs){
+        if(docs.length > 0){
             res.render('search.hbs', {
-                user, reviews: docs
+                user, reviews: docs, keyword
             })
         } 
         else{
             res.render('search.hbs', {
-                user, error: "No match found"
+                user, error: "No match found", keyword
             })
         }
     })
@@ -141,7 +140,7 @@ router.post("/add-review", urlencoder, function(req, res){
         pros:  req.body.pros,
         cons:  req.body.cons,
         verdict:  req.body.verdict,
-        category:   req.body.category
+        category:  req.body.category
     }
 
     for(i = 0; i < req.body.counter; i++) {

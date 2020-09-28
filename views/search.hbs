@@ -32,7 +32,7 @@
                     </li>
                 </ul>
                 
-                <form action="review/searchResult" method="post">
+                <form action="searchResult" method="post">
                     <input type="text" id="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
@@ -79,7 +79,10 @@
             <div class="container search">
                 <div class="row">
                     <div class="col-12 m-auto headerSearch">
-                        <h3>Search Results for  <span id="searchInput">"Monitor"</span></h3>
+                        <h3>Search Results for  <span id="searchInput">"{{keyword}}" </span></h3>
+                        {{#if error}}
+                            <h3>{{error}}</h3>
+                        {{/if}}
                     </div>
                 </div>
                 {{!-- <div class ="row filter">

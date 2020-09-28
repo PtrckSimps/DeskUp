@@ -46,7 +46,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/user-profile" id="dropdowntext">User Profile</a>
                             <a class="dropdown-item" href="/user/manage-users" id="dropdowntext">Manage Users</a>
-                            <a class="dropdown-item" href="/manage-reviews" id="dropdowntext">Manage Post</a>
+                            <a class="dropdown-item" href="/review/manage-reviews" id="dropdowntext">Manage Post</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/signout" id="dropdowntext">Logout</a>
                         </div>
@@ -162,7 +162,7 @@
                     </div>
                 </div>
             {{/with}}
-        </div>
+            </div>
                 <div class="container mb-5" id="parentContainer">
                     {{#if user.username}} 
                         <p class="comments">Comments</p>
@@ -198,7 +198,13 @@
                             <div class="comment-text w-100">
                                 <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
                                 <div class="comment-footer float-right">
-                                        <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2">Delete</button>                    
+                                    {{#ifEquals ../user.username username}}                             
+                                        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
+                                        <div class="divider"></div>
+                                        <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton">Delete</button>
+                                    {{else}}
+                                        <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton">Delete</button>
+                                    {{/ifEquals}}                                                       
                                 </div>           
                             </div>
                         </div> 
@@ -206,7 +212,7 @@
                         {{/each}}
                     {{else}} {{#ifEquals user.role "user"}}
                         {{#each review.comments}}
-                        <div data-id={{_id}}></div>
+                        <div data-id={{_id}}>
                         <div class="d-flex flex-row comment-row m-t-0 border-bottom">
                             <div class="comment-text w-100">
                                 <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
@@ -214,7 +220,7 @@
                                     {{#ifEquals ../user.username username}}                             
                                         <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#editComment"> Edit</button> 
                                         <div class="divider"></div>
-                                        <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2">Delete</button>
+                                        <button type="button" id="deleteButton" title-id="{{../review.title}}" username="{{username}}" data-id={{_id}} comment="{{comment}}" class="btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton">Delete</button>
                                     {{/ifEquals}}
                                 </div>           
                             </div>
@@ -222,10 +228,21 @@
                         </div>
                         {{/each}}
                     {{else}}
+                        {{#each review.comments}}
+                        <div data-id={{_id}}>
+                        <div class="d-flex flex-row comment-row m-t-0 border-bottom">
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium">{{username}}</h5> <span class="text-muted float-right">{{date}}</span>  <span class="m-b-15 d-block">{{comment}}</span>
+                                <div class="comment-footer float-right">  
+                                </div>           
+                            </div>
+                        </div>
+                        </div> 
+                        {{/each}}
                     {{/ifEquals}} {{/ifEquals}}
-                </div>           
-        </div>
-    </div>
+                </div>
+        </div> 
+    </div>          
         <div class="mt-5 pt-4 pb-3 footer stickyFooter">
             <div class="container">
                 <div class="row">
@@ -283,6 +300,7 @@
                         console.log("comment was: " + c)
                         if(c){
                             let parent = document.getElementById("parentContainer")
+                            let divID = document.createElement("div")
                             let commentdiv = document.createElement("div")
                             let commentText = document.createElement("div")
                             let h5 = document.createElement("h5")
@@ -290,6 +308,31 @@
                             let span2 = document.createElement("span")
                             let commentfooter = document.createElement("div")  
                             let date = c.date
+
+                            let deleteButton = document.createElement("button")
+                            let editButton = document.createElement("button")
+                            let divider = document.createElement("div")
+
+                            divID.setAttribute('data-id',id)
+
+                            divider.className = "divider"
+                            
+                            
+                            deleteButton.setAttribute('type','button')
+                            $(deleteButton).attr("id", "deleteButton")
+                            /* deleteButton.setAttribute('id','deleteButton')*/
+                            deleteButton.setAttribute('title-id', title)
+                            deleteButton.setAttribute('username',name)
+                            deleteButton.setAttribute('data-id',id)
+                            deleteButton.setAttribute('comment',comment)
+                            deleteButton.className = "btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton";
+
+                            editButton.className = "btn btn-outline-dark btn-sm"
+                            editButton.setAttribute("type", "button")
+                            editButton.setAttribute("data-toggle", "modal")
+                            editButton.setAttribute("data-target", "#editComment")
+
+
                             commentdiv.className = "d-flex flex-row comment-row m-t-0 border-bottom"
                             commentText.className = "comment-text w-100"
                             h5.className = "font-medium"
@@ -300,6 +343,11 @@
                             h5.innerHTML = name
                             span1.innerHTML = c
                             span2.innerHTML = comment
+                            editButton.innerHTML = "Edit"
+                            deleteButton.innerHTML = "Delete"
+                            
+                            commentfooter.appendChild(editButton)
+                            commentfooter.appendChild(deleteButton)
 
                             commentText.appendChild(h5)
                             commentText.appendChild(span1)
@@ -308,17 +356,46 @@
 
                             commentdiv.appendChild(commentText)
 
-                            parent.append(commentdiv)
+                            divID.appendChild(commentdiv)
 
+                            parent.append(divID)
+                            
                         }
                     }
                 })
+
+                
             })
             
             
         })
         $(document).ready(function(){
             $("button#deleteButton").click(function(){
+                let id=$(this).attr("data-id")
+                let username=$(this).attr("username")
+                let title=$(this).attr("title-id")
+                let comment=$(this).attr("comment")
+                $.ajax({
+                    url: "../delete-comment",
+                    method: "post",
+                    data: {
+                        id: id,
+                        username: username,
+                        title: title,
+                        comment: comment
+                    },
+                    success : function(c){
+                        console.log("Delete was: " + c)
+                        if(c){
+                            $("div[data-id="+id+"]").remove()
+                        }
+                    }
+                })
+            })
+        })
+
+        $(document).ready(function(){
+            $(document).on('click', '#deleteButton', function() {
                 let id=$(this).attr("data-id")
                 let username=$(this).attr("username")
                 let title=$(this).attr("title-id")

@@ -67,9 +67,6 @@ hbs.registerHelper('each_cat', function(ary, max, options) {
     return result.join('');
 });
 
-
-
-
 router.get('/', (req,res) =>{
     //access the homepage
     //logged in
