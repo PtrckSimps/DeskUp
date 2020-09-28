@@ -293,9 +293,14 @@ router.post("/comment", urlencoder, function(req, res){
     })
 
     Review.insertComment(id, commentObj).then((doc)=>{
-        console.log(doc)
+        let n = doc.comments.length
+        let newId = doc.comments[n-1]._id
+        let newDoc ={
+            newID : newId,
+            date: momentdate
+        }
         if(doc){
-            res.send(momentdate)
+            res.send(newDoc)
         }else{
             res.send(false)
         }
@@ -331,6 +336,7 @@ router.post("/edit-comment", urlencoder, function(req, res){
     })
 
     Review.deleteComment(title, id).then((doc)=>{
+        console.log("deleted" + doc)
         Review.updateComment(title, comment).then((doc)=>{
             console.log("deleted comment in Review")
             if(doc) {

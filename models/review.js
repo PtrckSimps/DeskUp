@@ -175,7 +175,7 @@ exports.myRev = function(name){
 
 exports.insertComment = function(id, comment){
   return new Promise(function(resolve, reject){
-      Review.findOneAndUpdate({_id: id}, { $push: {comments: comment}}).then((user)=>{
+      Review.findOneAndUpdate({_id: id}, { $push: {comments: comment}}, {new : true}).then((user)=>{
           resolve(user)
       }, (err)=>{
           reject(err)

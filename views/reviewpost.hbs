@@ -312,7 +312,7 @@
                             let editButton = document.createElement("button")
                             let divider = document.createElement("div")
 
-                            divID.setAttribute('data-id',id)
+                            divID.setAttribute('data-id', c.newID)
 
                             divider.className = "divider"
                             
@@ -321,7 +321,7 @@
                             $(deleteButton).attr("id", "deleteButton")
                             deleteButton.setAttribute('title-id', title)
                             deleteButton.setAttribute('username',name)
-                            deleteButton.setAttribute('data-id',id)
+                            deleteButton.setAttribute('data-id',c.newID)
                             deleteButton.setAttribute('comment',comment)
                             deleteButton.className = "btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton";
 
@@ -330,7 +330,7 @@
                             $(editButton).attr("id", "editButton")
                             editButton.setAttribute('title-id', title)
                             editButton.setAttribute('username',name)
-                            editButton.setAttribute('data-id',id)
+                            editButton.setAttribute('data-id',c.newID)
                             editButton.setAttribute('comment',comment)
                             
 
@@ -343,7 +343,7 @@
                             commentfooter.className = "comment-footer float-right"
 
                             h5.innerHTML = name
-                            span1.innerHTML = c
+                            span1.innerHTML = c.date
                             span2.innerHTML = comment
                             editButton.innerHTML = "Edit"
                             deleteButton.innerHTML = "Delete"
