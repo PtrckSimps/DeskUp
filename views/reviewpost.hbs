@@ -176,7 +176,7 @@
                                 <input class="commentNow"  type="tex" id="comment" name="comment" placeholder="Write a comment..."></input>
                             </div> 
                             <div class="row d-flex justify-content-end">
-                                <button type="submit" name="{{user.username}}" class="commentLoginbutton">Comments</button>
+                                <button type="submit" ob-id="{{user.id}}" name="{{user.username}}" class="commentLoginbutton">Comments</button>
                             </div>  
                         {{!-- </form>                                           --}}
                     {{else}}
@@ -282,6 +282,7 @@
         $(document).ready(function(){
             $("button.commentLoginbutton").click(function(){
                 let name = $(this).attr('name')
+                let obid =$(this).attr('ob-id')
                 let comment = $(".commentNow").val()
                 let title = $("#postTitle").val()
                 let id = $("#postID").val()
@@ -292,6 +293,7 @@
                     data: {
                         id: id,
                         name: name,
+                        obid: obid,
                         comment: comment,
                         title: title
                     },
@@ -321,6 +323,7 @@
                             $(deleteButton).attr("id", "deleteButton")
                             deleteButton.setAttribute('title-id', title)
                             deleteButton.setAttribute('username',name)
+                            deleteButton.setAttribute('ob-id', obid)
                             deleteButton.setAttribute('data-id',c.newID)
                             deleteButton.setAttribute('comment',comment)
                             deleteButton.className = "btn btn btn-outline-danger btn-sm float-right ml-2 deleteButton";
@@ -330,6 +333,7 @@
                             $(editButton).attr("id", "editButton")
                             editButton.setAttribute('title-id', title)
                             editButton.setAttribute('username',name)
+                            editButton.setAttribute('ob-id', obid)
                             editButton.setAttribute('data-id',c.newID)
                             editButton.setAttribute('comment',comment)
                             
@@ -371,6 +375,7 @@
             
             
         })
+        /*
         $(document).ready(function(){
             $("button#deleteButton").click(function(){
                 let id=$(this).attr("data-id")
@@ -395,10 +400,11 @@
                 })
             })
         })
-
+        */
         $(document).ready(function(){
             $(document).on('click', '#deleteButton', function() {
                 let id=$(this).attr("data-id")
+                let userid = $(this).attr("ob-id")
                 let username=$(this).attr("username")
                 let title=$(this).attr("title-id")
                 let comment=$(this).attr("comment")
@@ -407,6 +413,7 @@
                     method: "post",
                     data: {
                         id: id,
+                        userid: userid,
                         username: username,
                         title: title,
                         comment: comment
@@ -424,6 +431,7 @@
         $(document).ready(function(){
             $(document).on('click', '#editButton', function() {
                 let id=$(this).attr("data-id")
+                let userid = $(this).attr("ob-id")
                 let username=$(this).attr("username")
                 let title=$(this).attr("title-id")
                 let comment=$(this).attr("comment")
@@ -433,6 +441,7 @@
                 saveButton.setAttribute('type','button')
                 saveButton.setAttribute('id','saveButton')
                 saveButton.setAttribute('title-id', title)
+                saveButton.setAttribute('ob-id', userid)
                 saveButton.setAttribute('username', username)
                 saveButton.setAttribute('data-id',id)
                 saveButton.setAttribute('comment',comment)
@@ -452,6 +461,7 @@
             $(document).on('click', '#saveButton', function() {
                 let id= $(this).attr("data-id")
                 let username=$(this).attr("username")
+                let userid = $(this).attr("ob-id")
                 let title=$(this).attr("title-id")
                 let comment=$(this).attr("comment")
                 var parent = $(this).parent()
@@ -466,6 +476,7 @@
                     data: {
                         id: id,
                         username: username,
+                        userid: userid,
                         title: title,
                         comment: comment,
                         newComment: newComment

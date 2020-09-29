@@ -29,7 +29,7 @@ router.get("/", function(req, res){
 
 router.post("/ReviewPost/:title", urlencoder, function(req, res){
     //user want to view review post
-    let user = {
+    let user2 = {
         username: req.session.username,
         name: req.session.name,
         role : req.session.role
@@ -37,12 +37,14 @@ router.post("/ReviewPost/:title", urlencoder, function(req, res){
 
     let title = req.body.revid
     console.log(title)
-
-    Review.review(title).then((doc)=>{
-        res.render('reviewpost.hbs', {
-            user, review: doc, user
+    User.get(req.session.username).then((user)=>{
+        Review.review(title).then((doc)=>{
+            res.render('reviewpost.hbs', {
+                user, review: doc, user
+            })
         })
     })
+    
 })
 
 router.post("/ReviewPostC", urlencoder, function(req, res){
@@ -312,6 +314,7 @@ router.post("/comment", urlencoder, function(req, res){
 router.post("/edit-comment", urlencoder, function(req, res){
     let id = req.body.id
     let username = req.body.username
+    let userid = req.body.userid
     let title = req.body.title
     let oldcomment = req.body.comment
     let newComment = req.body.newComment
@@ -325,6 +328,7 @@ router.post("/edit-comment", urlencoder, function(req, res){
 
     console.log(title)
     console.log(id)
+    console.log(userid)
     console.log(oldcomment)
     console.log(newComment)
     console.log(comment)
@@ -352,10 +356,12 @@ router.post("/edit-comment", urlencoder, function(req, res){
 router.post("/delete-comment", urlencoder, function(req, res){
     let id = req.body.id
     let username = req.body.username
+    let userid = req.body.userid
     let title = req.body.title
     let comment = req.body.comment
     
     console.log(title)
+    console.log(userid)
     console.log(id)
     console.log(comment)
 
