@@ -133,7 +133,6 @@ exports.update = function(id, review){
         pros: review.pros,
         cons: review.cons,
         verdict: review.verdict,
-        category: review.category,
         $push: {specs: review.specs}
       }).then((review)=>{
         resolve(review)
