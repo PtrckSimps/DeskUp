@@ -45,11 +45,21 @@ hbs.registerHelper('each_rev', function(ary, max, options) {
         return options.inverse(this);
 
     var result = [ ];
-    for(var i = c; i < max+c && i < ary.length; ++i){
-        result.push(options.fn(ary[i]));
+    var d=0;
+    var i;
+    while(d < max) {
+        i = ary.length-c-1;
+        ++c;
+        console.log("i=" + i);
+        console.log("c=" + c);
+        console.log("d=" + d);
+        console.log("max=" + max);
+        console.log("ary=" + ary.length);
 
+        result.push(options.fn(ary[i]));
+        d++;
     }
-    c=i;
+    
     return result.join('');
 });
 
@@ -63,9 +73,11 @@ hbs.registerHelper('each_cat', function(ary, max, options) {
         result.push(options.fn(ary[i]));
 
     }
-    
     return result.join('');
 });
+
+
+
 
 router.get('/', (req,res) =>{
     //access the homepage
@@ -81,10 +93,10 @@ router.get('/', (req,res) =>{
         
         Review.all().then((doc)=>{
             Category.all().then((categories)=>{
-                res.render('index.hbs', {
-                    user, review : doc, categories: categories                
-                })
+            res.render('index.hbs', {
+                user, review : doc, categories: categories                
             })
+        })
         })
     //not logged in
     }else{
@@ -93,6 +105,7 @@ router.get('/', (req,res) =>{
             Category.all().then((categories)=>{
                 res.render('index.hbs', {
                     review : doc, categories: categories
+                
                 })
             })
         })
