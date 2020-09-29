@@ -27,6 +27,9 @@ hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
+hbs.registerHelper('times', function(arg1) {
+    return (arg1 * 10)
+});
 
 // hbs.registerHelper('each_start', function(ary, max, options) {
 //     if(!ary || ary.length == 0)
