@@ -554,7 +554,7 @@ color: #afb2b7;
   text-align: center;
 }
 
-.fa-desktop, .fa-mouse, .fa-keyboard, .fa-headphones, .fa-microphone, .fa-laptop .fa-lightbulb {
+.fa-desktop, .fa-mouse, .fa-keyboard, .fa-headphones, .fa-microphone, .fa-laptop, .fa-lightbulb {
   position: relative;
   z-index: 10;
   margin-top: 5.5rem;
