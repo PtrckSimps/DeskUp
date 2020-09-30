@@ -110,7 +110,7 @@
         </div>
         <div class="modal" tabindex="-1" role="dialog" id="deleted">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" >
+                <div class="modal-content">
                 <div class="modal-header" style="background-color: indianred;">
                     <h5 class="modal-title" style="color:white">Delete</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -136,7 +136,7 @@
                 <div class="modal-body">
                     <form method="Post" action="edit-role">                        
                         <div class="form-group">
-                            <input type="hidden" name="id" id="edit_id">
+                            <input type="hidden" name="editid" id="editid">
                             <label for="recipient-name" class="col-form-label">Role</label>
                             <select class="form-control"  name="role" id="role">
                                 <option value="admin">admin</option>
@@ -211,9 +211,10 @@
     <script>
         $(document).ready(function(){
                 $("button#editButton").click(function(){
-                    let id=$(this).attr("data-id")
-                    let tile =$(div#title).attr("data-id")
-                    $("input#edit_id").val(id)
+                    let id =$(this).attr("data-id")
+                    console.log(id)
+                    /*let tile =$(div#title).attr("data-id")*/
+                    $("input#editid").val(id)
             })
         })
 

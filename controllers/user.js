@@ -171,7 +171,7 @@ router.post("/edit-role", function(req, res){
     //     role : req.session.role
     // }
     
-    let id = req.body.id
+    let id = req.body.editid
     let role = req.body.role
     
     console.log(id)

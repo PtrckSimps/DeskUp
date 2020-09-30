@@ -201,7 +201,7 @@ exports.editRole = function(id, role){
             reject(err)
         })
     })
-}
+} 
 
 exports.deleteUser = function(id){
     return new Promise(function(resolve, reject){
