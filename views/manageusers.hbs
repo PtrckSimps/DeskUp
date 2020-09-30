@@ -34,8 +34,8 @@
                     </li>
                 </ul>
 
-                <form action="review/searchResult" method="post">
-                    <input type="text" id="search" name="search" class="search-data" placeholder="Search" required>
+                <form action="/review/searchResult" method="get">
+                    <input type="search" id="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
                 
@@ -106,6 +106,21 @@
                 </div>
                 </div>
                 {{/each}}
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="deleted">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" >
+                <div class="modal-header" style="background-color: indianred;">
+                    <h5 class="modal-title" style="color:white">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    User Deleted
+                </div>  
+                </div>
             </div>
         </div>
         {{!-- EDIT MODAL --}}
@@ -214,6 +229,7 @@
                         success : function(c){
                             console.log("Delete was: " + c)
                             if(c){
+                                $('#deleted').modal('show')
                                 $("div[data-id="+id+"]").remove()
                             }
                         }

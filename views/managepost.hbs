@@ -34,8 +34,8 @@
                     </li>
                 </ul>
 
-                <form action="/review/searchResult" method="post">
-                    <input type="text" id="search" name="search" class="search-data" placeholder="Search" required>
+                <form action="/review/searchResult" method="get">
+                    <input type="search" id="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
 
@@ -80,15 +80,15 @@
         <div class="content" id="marginclass">
             <div class="container featuredCont">
                 <div class="row headerRowFeatured">
-                    <div class="col-md-5" id="col-md-Feartured">
+                    <div class="col-md-12" id="col-md-Feartured">
                         <h1 class="featuredText">Manage Reviews</h1>
                     </div>
                 </div>
 
-                <div class="row mt-3 f">
-                        <button type="button" class="btn mb-3 float-right" data-toggle="modal" data-target="#addpost" id="addButton">Add Review</button>
+                <div class="row mt-3">
+                        <button type="button" class="btn mb-3 float-right" data-toggle="modal" data-target="#addpost" id="addButton">Add a Review</button>
                         {{#ifEquals user.role "admin"}}
-                            <button type="button" class="btn mb-3 float-right" data-toggle="modal" data-target="#addCategory" id="categButton">Add Category</button>
+                            <button type="button" class="btn mb-3 float-right" data-toggle="modal" data-target="#addCategory" id="categButton">Add a Category</button>
                         {{/ifEquals}}
                 </div>
                 
@@ -96,7 +96,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Post</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Add a Review</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Content:</label>
-                                            <textarea class="form-control" name="content" id="content"></textarea>
+                                            <textarea class="form-control" name="content" id="content" style="height: 400px;"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Secondary image: (Required Format: <b>https://drive.google.com/uc?id=</b><i>link-id</i>)</label>
@@ -135,16 +135,16 @@
                                         <div class="form-group row">
                                             <div class=col-sm-6>
                                                 <label for="message-text" class="col-form-label">The Good:</label>
-                                                <textarea class="form-control" name="pros" id="pros"></textarea>
+                                                <textarea class="form-control" name="pros" id="pros" style="height: 300px;"></textarea>
                                             </div>
                                             <div class=col-sm-6>
                                                 <label for="message-text" class="col-form-label">Not so Good:</label>
-                                                <textarea class="form-control" name="cons" id="cons"></textarea>
+                                                <textarea class="form-control" name="cons" id="cons" style="height: 300px;"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="message" class="col-form-label">Verdict:</label>
-                                            <textarea class="form-control" name="verdict" id="verdict"></textarea>
+                                            <textarea class="form-control" name="verdict" id="verdict" style="height: 350px;"></textarea>
                                         </div>
                                         <div class="form-group row">
                                             <div class=col-sm-6>
@@ -168,7 +168,7 @@
                                             </div>
                                         </div>  
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-info">Add</button>
+                                            <button type="submit" class="btn btn-info">Add Review</button>
                                         </div> 
                                     </form>                             
                                 </div>
@@ -196,7 +196,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Description:</label>
-                                            <textarea class="form-control" name="desc" id="desc"></textarea>
+                                            <textarea class="form-control" name="desc" id="desc" style="height: 150px;"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Picture:</label>
@@ -207,7 +207,7 @@
                                             <input type="text" class="form-control" name="icon" id="icon">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-info">Add</button>
+                                            <button type="submit" class="btn btn-info">Add Category</button>
                                         </div> 
                                     </form>                             
                                 </div>
@@ -220,13 +220,13 @@
                 <div class="row pt-3 mng-post-row">
                     <div class="col-md-12 border-bottom">
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-9">
                                 <p class="postTitle">{{title}}</p>
                                 <p class="articleDetails">by {{author}}. {{date}}</p>
                             </div>
-                            <div class="col-md-2">
-                                <button type="button" id="deleteButton" title ="{{title}}" category ="{{category}}" author-id="{{author}}" data-id="{{_id}}" class="btn btn btn-outline-danger btn-sm float-right ml-2">Delete Post</button>
-                                <button type="button" id="editButton" title ="{{title}}" data-id="{{_id}}" class="btn btn-outline-dark btn-sm float-right">edit</button>
+                            <div class="col-md-3">
+                                <button type="button" id="deleteButton" title ="{{title}}" category ="{{category}}" author-id="{{author}}" data-id="{{_id}}" class="btn btn btn-outline-danger btn-sm float-right ml-2">Delete Review</button>
+                                <button type="button" id="editButton" title ="{{title}}" data-id="{{_id}}" class="btn btn-outline-dark btn-sm float-right">Edit Review</button>
                             </div> 
                         </div>
                         <p class="postPreview">{{content}}
@@ -242,6 +242,21 @@
             <input type="hidden" name="id" id="edit_id">
             <input type="hidden" name="title" id="edit_title">
         </form>
+        <div class="modal" tabindex="-1" role="dialog" id="deleted">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" >
+                <div class="modal-header" style="background-color: indianred;">
+                    <h5 class="modal-title" style="color:white">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Review Deleted
+                </div>  
+                </div>
+            </div>
+        </div>
 </div>
         <div class="pt-4 pb-3 footer stickyFooter">
             <div class="container">
@@ -319,6 +334,7 @@
                     success : function(c){
                         console.log("Delete was: " + c)
                         if(c){
+                            $('#deleted').modal('show')
                             $("div[data-id="+id+"]").remove()
                         }
                     }
@@ -334,6 +350,6 @@
                     $("input#edit_title").val(title)
                     $("form#edit_form").submit()
                 })
-            })
+        })
     </script>
 </html>

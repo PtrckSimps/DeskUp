@@ -66,13 +66,14 @@ router.post("/ReviewPostC", urlencoder, function(req, res){
 
 // Test Run for views
 
-router.post('/searchResult', urlencoder, (req,res) =>{
+router.get('/searchResult', urlencoder, (req,res) =>{
     //User search something -> search results
     let user = {
         username: req.session.username,
         role : req.session.role
     }
-    let keyword = req.body.search
+    let keyword = req.query.search
+    // let keyword = req.body.search
     
     console.log("keyword is " + keyword)
 

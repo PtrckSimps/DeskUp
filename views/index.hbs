@@ -44,8 +44,8 @@
                     </li>
                 </ul>
 
-                <form action="review/searchResult" method="post">
-                    <input type="text" id="search" name="search" class="search-data" placeholder="Search" required>
+                <form action="review/searchResult" method="get">
+                    <input type="search" id="search" name="search" class="search-data" placeholder="Search" required>
                     <button type="submit" class="fas fa-search"></button>
                 </form>
                 {{#ifEquals user.role "admin"}}
