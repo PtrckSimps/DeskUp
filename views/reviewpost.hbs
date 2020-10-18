@@ -118,24 +118,14 @@
                         </div>
                     </div>
                 </div>
-                {{!-- <div class="row mb-4">
-                    <div class="col-12">
-                        <img src="/images/curved.jpg" class="img-responsive reviewPostIMG">
-                    </div>
-                </div> --}}
                 <div class="row mb-4">
                     <div class="col-6">
                         <p class="specificationsHeading">Specifications</p>
-                        {{!-- <p class="specs reviewText">Name: LG 38UC99-W <br> Screen size: 37.5" Curved <br> Resolution: 3840 x 1600 <br> Refresh Rate: 60 Hz / 75Hz with Display Port with FreeSync 
-                            <br> Panel Type: IPS <br>  sRGb over 99% <br>  1ms Motion Blur Reduction <br> USB Type-C™ & USB 3.0 Quick Charge <br> Bluetooth Speakers with Rich Bass                  
-                        </p> --}}
                         <ul class="speclist">
                             {{#each specs}}
                             <li class="specs reviewText">{{this}}</li>              
                             {{/each}}
                         </ul>
-                        
-                        {{!-- <a href=""></a><div class="buyNow">Buy Now</div></a> --}}
                     </div>
 
                     <div class="col-6 border-left reviewborderleft">
@@ -279,6 +269,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script>
+
+        // add comment  
         $(document).ready(function(){
             $("button.commentLoginbutton").click(function(){
                 let name = $(this).attr('name')
@@ -376,32 +368,8 @@
             
             
         })
-        /*
-        $(document).ready(function(){
-            $("button#deleteButton").click(function(){
-                let id=$(this).attr("data-id")
-                let username=$(this).attr("username")
-                let title=$(this).attr("title-id")
-                let comment=$(this).attr("comment")
-                $.ajax({
-                    url: "../delete-comment",
-                    method: "post",
-                    data: {
-                        id: id,
-                        username: username,
-                        title: title,
-                        comment: comment
-                    },
-                    success : function(c){
-                        console.log("Delete was: " + c)
-                        if(c){
-                            $("div[data-id="+id+"]").remove()
-                        }
-                    }
-                })
-            })
-        })
-        */
+
+        //delete button comments
         $(document).ready(function(){
             $(document).on('click', '#deleteButton', function() {
                 let id=$(this).attr("data-id")
@@ -429,6 +397,7 @@
             })
         })
 
+        //edit button on comments
         $(document).ready(function(){
             $(document).on('click', '#editButton', function() {
                 let id=$(this).attr("data-id")
@@ -458,6 +427,7 @@
             })
         })
 
+        // save comment
         $(document).ready(function(){
             $(document).on('click', '#saveButton', function() {
                 let id= $(this).attr("data-id")
